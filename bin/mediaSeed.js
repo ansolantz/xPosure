@@ -31,7 +31,6 @@ const mediaData = [
 
 
 
-
 MediaData.create(user, (err) => {
   if (err) { throw (err) }
   console.log(`Created ${mediaData.length} media data`)

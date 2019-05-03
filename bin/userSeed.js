@@ -32,8 +32,6 @@ const user = [
 ]
 
 
-
-
 User.create(user, (err) => {
   if (err) { throw (err) }
   console.log(`Created ${user.length} users`)
