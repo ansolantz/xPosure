@@ -112,21 +112,21 @@ xPosure is a social picture discovery and organisation application. It is build 
 | /explore        | GET       | render explore view, get all media |
 | /explore/filter | POST      | Send query for filtered feed       |
 | /explore/filter | GET       | Render filtered feed               |
-| /media_id       | POST      | Send query for media_id            |
-| /media_id       | POST      | Render image in view               |
+| /exoplore/media_id       | POST      | Send query for media_id            |
+| /explore/media_id       | POST      | Render image in view               |
 
 
 
-### manage.js (protected)
+### mymedia.js (protected)
 | Route            | HTTP Verb | Description                        |
 | ---------------- | --------- | ---------------------------------- |
 | /mymedia         | GET       | render myMedia view, get all media |
 | /mymedia/filter  | POST      | Send query for filtered media      |
 | /mymedia/filter  | GET       | Render filtered media              |
-| /manage/media_id | POST      | Send query for media_id            |
-| /manage/media_id | POST      | Render image in view               |
-| /manage/media_id | PATCH/PUT | Change media in DB                 |
-| /manage/media_id | DELTE     | Delete media in DB                 |
+| /mymedia/manage/media_id | POST      | Send query for media_id            |
+| /mymedia/manage/media_id | POST      | Render image in view               |
+| /mymedia/manage/media_id | PATCH/PUT | Change media in DB                 |
+| /mymedia/manage/media_id | DELTE     | Delete media in DB                 |
 |                  |           |                                    |
 
 
