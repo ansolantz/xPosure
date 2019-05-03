@@ -1,17 +1,28 @@
-{
-  (_id)
-  url
-      thumbnail
-      full_size
-  meta
-      media_type
-      timestamp
-      geolocation
-      camera
-      description
-  creatorId
-  visibility
-  likes
-  saves
-  filtertags [...]
-  }
+'use strict';
+
+const mongoose = require('mongoose');
+const Schema   = mongoose.Schema;
+
+const mediaSchema = new Schema({
+  url: {
+    thumbnail: String, 
+    full_size: String
+  },
+  meta: {
+    media_type: String,
+    timestamp: true,
+    geolocation: [Number],
+    camera: String,
+    description: String
+  },
+  creatorId: String,
+  visibility: true,
+  likes: [],
+  saves: [],
+  filtertags: []
+});
+
+const Media = mongoose.model('Media', mediaSchema);
+
+module.exports = Media; 
+
