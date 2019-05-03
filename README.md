@@ -1,7 +1,7 @@
 # xPosure (working title)
 
 ## Description
-xPosure is a social picture discovery and organisation application. It is build using express, Node.js, mongoose, and bootstrap.
+xPosure is a social picture discovery and organisation application. It is built using express, Node.js, mongoose, and bootstrap.
 
 ## User Stories
 
@@ -45,84 +45,51 @@ As a user, I want to see a map with tagges pictures, so I can see what pictures 
 ## Data Models
 
 ### user.js
-``const userSchema = new Schema({`
-
-  `firstName: String,`
-
-  `lastName: String,`
-
-  `email: String,`
-
-  `username: String,`
-
-  `passwordHash: String,`
-
-  `profile : {`
-
-​    `bio: String,`
-
-​    `image: String,`
-
-​    `location: String`
-
-  `},`
-
-  `media: [],`
-
-  `followers: [],`
-
-  `following: [],`
-
-  `likes: [],`
-
-  `saved: [],`
-
-  `activityLog: [],`
-
-  `timestamp: {`
-
-​    `created_at: "created_at",`
-
-  `}`
-
-`});`
+```js
+const userSchema = new Schema({
+  firstName: String,
+  lastName: String,
+  email: String,
+  username: String,
+  passwordHash: String,
+  profile: {
+​    bio: String,
+​    image: String,
+​    location: String
+  },
+  media: [],
+  followers: [],
+  following: [],
+  likes: [],
+  saved: [],
+  activityLog: [],
+  timestamp: {
+​    created_at: Date(),
+  }
+});
+```
 
 ### media.js
-``const mediaSchema = new Schema({`
-
-  `url: {`
-
-​    `thumbnail: String,` 
-
-​    `full_size: String`
-
-  `},`
-
-  `meta: {`
-
-​    `media_type: String,`
-
-​    `timestamp: true,`
-
-​    `geolocation: [Number],`
-
-​    `camera: String,`
-
-​    `description: String`
-
-  `},`
-
-  `creatorId: String,`
-
-  `visibility: true,`
-
-  `likes: [],`
-
-  `saves: [],`
-
-  `filtertags: []`
-
-`});`
+```js
+const mediaSchema = new Schema({
+  url: {
+​    thumbnail: String, 
+​    full_size: String
+  },
+  meta: {
+​    media_type: String,
+​    timestamp: Date(),
+​    geolocation: [Number],
+​    camera: String,
+​    description: String
+  },
+  creatorId: String,
+  visibility: boolean,
+  likes: [],
+  saves: [],
+  filtertags: []
+});
+```
 
 ## Routes
 
@@ -145,10 +112,10 @@ As a user, I want to see a map with tagges pictures, so I can see what pictures 
 | Route           | HTTP Verb | Description                        |
 | --------------- | --------- | ---------------------------------- |
 | /explore        | GET       | render explore view, get all media |
-| /explore/filter | POST      | Send query for filtered feed       |
-| /explore/filter | GET       | Render filtered feed               |
-| /exoplore/media_id       | POST      | Send query for media_id            |
-| /explore/media_id       | POST      | Render image in view               |
+| /explore/:filter | POST      | Send query for filtered feed       |
+| /explore/:filter | GET       | Render filtered feed               |
+| /explore/:media_id       | POST      | Send query for media_id            |
+| /explore/:media_id       | GET      | Render image in view               |
 
 
 
@@ -156,12 +123,12 @@ As a user, I want to see a map with tagges pictures, so I can see what pictures 
 | Route            | HTTP Verb | Description                        |
 | ---------------- | --------- | ---------------------------------- |
 | /mymedia         | GET       | render myMedia view, get all media |
-| /mymedia/filter  | POST      | Send query for filtered media      |
-| /mymedia/filter  | GET       | Render filtered media              |
-| /mymedia/manage/media_id | POST      | Send query for media_id            |
-| /mymedia/manage/media_id | POST      | Render image in view               |
-| /mymedia/manage/media_id | PATCH/PUT | Change media in DB                 |
-| /mymedia/manage/media_id | DELTE     | Delete media in DB                 |
+| /mymedia/:filter  | POST      | Send query for filtered media      |
+| /mymedia/:filter  | GET       | Render filtered media              |
+| /mymedia/manage/:media_id | POST      | Send query for media_id            |
+| /mymedia/manage/:media_id | GET      | Render image in view               |
+| /mymedia/manage/:media_id | PATCH/PUT | Change media in DB                 |
+| /mymedia/manage/:media_id | DELETE     | Delete media in DB                 |
 |                  |           |                                    |
 
 
@@ -188,10 +155,10 @@ As a user, I want to see a map with tagges pictures, so I can see what pictures 
 
 
 ### Trello
-https://trello.com/invite/b/gNbmMcI2/6bc5b7c2b98e50db7c421eee55367784/xposure
+[Trello kanban board] (https://trello.com/invite/b/gNbmMcI2/6bc5b7c2b98e50db7c421eee55367784/xposure)
 
 ### Git
-https://github.com/scottmallinson/xPosure
+[Github code repository] (https://github.com/BenjaminWoerner/xPosure)
 
 
 ### Slides
