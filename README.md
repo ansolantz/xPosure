@@ -91,35 +91,45 @@ xPosure is a social picture discovery and organisation application. It is build 
 
 ## Routes
 
+
 ### index.js (public)
 
- => xplore.co/
-
-- home
-- signup
+| Route | HTTP Verb | Description           |
+| ----- | --------- | --------------------- |
+| /     | GET       | render home screen w/ |
+| /     | POST      | Log-in                |
 
 ### auth.js (public)
-=> xplore.co/signup
 
-- authentication flow (logn/signup)
+| Route   | HTTP Verb | Description        |
+| ------- | --------- | :----------------- |
+| /signup | GET       | render signup form |
+| /signup | POST      | Create new user    |
 
 ### explore.js (protected?)
-- render PhotoView
+| Route           | HTTP Verb | Description                        |
+| --------------- | --------- | ---------------------------------- |
+| /explore        | GET       | render explore view, get all media |
+| /explore/filter | POST      | Send query for filtered feed       |
+| /explore/filter | GET       | Render filtered feed               |
+| /media_id       | POST      | Send query for media_id            |
+| /media_id       | POST      | Render image in view               |
 
-=> xplore.co/explore
-=> xplore.co/media_id
+
 
 ### manage.js (protected)
-=> xplore.co/user_id/mymedia
-=> xplore.co/user_id/manage
+| Route            | HTTP Verb | Description                        |
+| ---------------- | --------- | ---------------------------------- |
+| /mymedia         | GET       | render myMedia view, get all media |
+| /mymedia/filter  | POST      | Send query for filtered media      |
+| /mymedia/filter  | GET       | Render filtered media              |
+| /manage/media_id | POST      | Send query for media_id            |
+| /manage/media_id | POST      | Render image in view               |
+| /manage/media_id | PATCH/PUT | Change media in DB                 |
+| /manage/media_id | DELTE     | Delete media in DB                 |
+|                  |           |                                    |
 
-- render MyMedia
-- get all Media (+filter)
 
-- render MediaEdit
-- patch/put/delete media
-
-- create folders
 
 
 ## Views
