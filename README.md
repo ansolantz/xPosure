@@ -92,20 +92,6 @@ xPosure is a social picture discovery and organisation application. It is build 
 ## Routes
 
 
-
-
-
-| Route             | HTTP Verb | Description                 |
-| ----------------- | --------- | --------------------------- |
-| /                 | GET       | render home screen w/       |
-| /                 | POST      | Log-in                      |
-| `/characters/:id` | PUT/PATCH | Update a specific character |
-| `/characters/:id` | DELETE    | Delete a specific character |
-
-
-
-
-
 ### index.js (public)
 
 | Route | HTTP Verb | Description           |
