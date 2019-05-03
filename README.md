@@ -3,8 +3,43 @@
 ## Description
 xPosure is a social picture discovery and organisation application. It is build using express, Node.js, mongoose, and bootstrap.
 
+## User Stories
 
-## Backlog
+**HOME**
+
+As a user, I want to see a nice landing page with info about the app and login , so that I can understand what it is about and how to join.
+
+
+
+**SIGNUP**
+
+As a user, I want to sign up easily, so that I can start managing and sharing my media.
+
+
+
+**MY MEDIA**
+
+As a user, I want to see all all my imported media in one site , so that I can have an overview and deciide what to do with it.
+
+**MEDIA EDIT**
+
+As user, I want to be able to change the data and settings of my media, so that I can optimise, organise, and share it. 
+
+**PHOTO VIEW**
+
+As a user, I want to have a full-scale picture view, so I can see all the details
+
+**FEED**
+
+As a user, I want have a feed of pictures from other users, so I can expore what aothers have shared.
+
+**MAP EXPLORE**
+
+As a user, I want to see a map with tagges pictures, so I can see what pictures were taken around me or around a location I'm interested in. 
+
+
+
+
 
 
 ## Data Models
