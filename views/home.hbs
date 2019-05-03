@@ -1,6 +1,14 @@
-{{#if user }}
-  <h2>Hello, {{user.displayName}}.</h2>
-{{else }}
-	<h2>Welcome!</h2>
-  <p><a href="/authenticate">Login with Instagram</a></p>
-{{/if }}
+<h1>Home</h1>
+<p>Welcome{{title}}</p>
+<div id="container">
+  <a href="/signup">
+    <button>Sign up</button>
+  </a>
+  <a href="/authenticate">
+    <button>Login</button>
+  </a>
+  
+  <a href="/secret">
+    <button>Protected page (requires authentication!)</button>
+  </a>
+</div>

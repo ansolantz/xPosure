@@ -10,8 +10,9 @@ const MongoStore = require('connect-mongo')(session);
 const passport = require('./config/passport-config'); // passport module setup and initial load
 const InstagramStrategy = require('./config/passport-instagram-strategy');
 
-// const indexRouter = require('./routes/index');
-// const usersRouter = require('./routes/users');
+var indexRouter = require('./routes/index');
+const exploreRouter = require('./routes/explore');
+const manageRouter = require('./routes/manage');
 
 mongoose
   .connect('mongodb://localhost/instagram-auth', { useNewUrlParser: true })
@@ -90,7 +91,7 @@ app.get('/authenticate',
 app.get('/auth/',
   passport.authenticate('instagram', { failureRedirect: '/login' }),
   function (req, res) {
-    res.redirect('/');
+    res.redirect('/mymedia');
   });
 
 app.get('/logout', function (req, res) {
