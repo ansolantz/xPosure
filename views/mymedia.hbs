@@ -1,0 +1,9 @@
+<p>ID: {{ user.id }}</p>
+<p>Username: {{ user.username }}</p>
+<p>Name: {{ user.displayName }}</p>
+<p>Bio: {{ user.bio }}</p>
+<p>Homepage: <a href="{{ user.homePage }}">{{ user.homePage }}</a></p>
+<img src="{{user.image}}"/>
+{{#each user.images }}
+  <a href="{{this.standard_resolution.url}}"><img src="{{this.thumbnail.url}}"></a>
+{{/each}}

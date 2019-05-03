@@ -1,7 +1,7 @@
 'use strict';
 
 const mongoose = require('mongoose');
-const Schema   = mongoose.Schema;
+const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
   firstName: String,
@@ -9,7 +9,7 @@ const userSchema = new Schema({
   email: String,
   username: String,
   passwordHash: String,
-  profile : {
+  profile: {
     bio: String,
     image: String,
     location: String
@@ -21,10 +21,10 @@ const userSchema = new Schema({
   saved: [],
   activityLog: [],
   timestamp: {
-    created_at: "created_at",
+    created_at: Date
   }
 });
 
 const User = mongoose.model('User', userSchema);
 
-module.exports = User; 
+module.exports = User;

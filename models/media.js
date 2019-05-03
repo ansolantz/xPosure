@@ -1,11 +1,11 @@
 'use strict';
 
 const mongoose = require('mongoose');
-const Schema   = mongoose.Schema;
+const Schema = mongoose.Schema;
 
 const mediaSchema = new Schema({
   url: {
-    thumbnail: String, 
+    thumbnail: String,
     full_size: String
   },
   meta: {
@@ -24,5 +24,4 @@ const mediaSchema = new Schema({
 
 const Media = mongoose.model('Media', mediaSchema);
 
-module.exports = Media; 
-
+module.exports = Media;
