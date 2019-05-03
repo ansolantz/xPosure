@@ -9,49 +9,24 @@ mongoose.connect(`mongodb://localhost/${dbName}`);
 const mediaData = [
   {
     url: {
-      thumbnail: "http://",
-      full_size: "http://",
+      thumbnail: "https://drive.google.com/drive/folders/11I0vClIgvHBgG9khrfoThEreJLZObhIj",
+      full_size: "https://drive.google.com/drive/folders/11I0vClIgvHBgG9khrfoThEreJLZObhIj",
     },
     meta: {
       media_type: String,
       timestamp: true,
-      geolocation: [Number],
-      camera: String,
+      geolocation: [41 3977 2 1906],
+      camera: "iPhone 6s",
       description: String
     },
-    creatorId: String,
+    creatorId: "",
     visibility: true,
     likes: [],
     saves: [],
     filtertags: []
-  },
-  {
-    title: "Harry Potter",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    author: "J.K. Rowling ",
-    rating: 9
-  },
+  }
+
 ]
-
-
-const mediaSchema = new Schema({
-  url: {
-    thumbnail: String,
-    full_size: String
-  },
-  meta: {
-    media_type: String,
-    timestamp: true,
-    geolocation: [Number],
-    camera: String,
-    description: String
-  },
-  creatorId: String,
-  visibility: true,
-  likes: [],
-  saves: [],
-  filtertags: []
-});
 
 
 

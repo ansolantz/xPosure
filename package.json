@@ -1,16 +1,21 @@
 {
-  "name": "hbs",
+  "name": "xposure",
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start-dev": "nodemon ./bin/www",
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "start-dev": "nodemon ./bin/www"
   },
   "dependencies": {
+    "connect-mongo": "^2.0.3",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.16.0",
+    "hbs": "^4.0.4",
     "http-errors": "~1.6.2",
-    "morgan": "~1.9.0"
+    "mongoose": "^5.5.5",
+    "morgan": "~1.9.0",
+    "passport": "^0.4.0",
+    "passport-instagram": "^1.0.0"
   }
 }
