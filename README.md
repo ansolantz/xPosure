@@ -10,45 +10,84 @@ xPosure is a social picture discovery and organisation application. It is build 
 ## Data Models
 
 ### user.js
-{
-(_id)
-first name
-last name
-email
-username
-password#
-profile
-    profile bio
-    profile image
-    location
-media [...]
-followers [...]
-following [...]
-likes [...]
-saved [...]
-timestamps
-    joined
-    activity log
-}
+``const userSchema = new Schema({`
+
+  `firstName: String,`
+
+  `lastName: String,`
+
+  `email: String,`
+
+  `username: String,`
+
+  `passwordHash: String,`
+
+  `profile : {`
+
+​    `bio: String,`
+
+​    `image: String,`
+
+​    `location: String`
+
+  `},`
+
+  `media: [],`
+
+  `followers: [],`
+
+  `following: [],`
+
+  `likes: [],`
+
+  `saved: [],`
+
+  `activityLog: [],`
+
+  `timestamp: {`
+
+​    `created_at: "created_at",`
+
+  `}`
+
+`});`
 
 ### media.js
-{
-(_id)
-url
-    thumbnail
-    full_size
-meta
-    media_type
-    timestamp
-    geolocation
-    camera
-    description
-creatorId
-visibility
-likes
-saves
-filtertags [...]
-}
+``const mediaSchema = new Schema({`
+
+  `url: {`
+
+​    `thumbnail: String,` 
+
+​    `full_size: String`
+
+  `},`
+
+  `meta: {`
+
+​    `media_type: String,`
+
+​    `timestamp: true,`
+
+​    `geolocation: [Number],`
+
+​    `camera: String,`
+
+​    `description: String`
+
+  `},`
+
+  `creatorId: String,`
+
+  `visibility: true,`
+
+  `likes: [],`
+
+  `saves: [],`
+
+  `filtertags: []`
+
+`});`
 
 ## Routes
 

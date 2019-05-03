@@ -19,9 +19,9 @@ const userSchema = new Schema({
   following: [],
   likes: [],
   saved: [],
+  activityLog: [],
   timestamp: {
-    joined: Date,
-    activityLog: []
+    created_at: "created_at",
   }
 });
 
