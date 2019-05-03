@@ -60,7 +60,7 @@ app.use(passport.session());
 //   login page.
 const ensureAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) { return next(); }
-  res.redirect('/login');
+  res.redirect('/');
 };
 
 app.get('/', (req, res) => {
@@ -100,9 +100,9 @@ app.get('/authenticate',
 //   login page.  Otherwise, the primary route function function will be called,
 //   which, in this example, will redirect the user to the home page.
 app.get('/auth/',
-  passport.authenticate('instagram', { failureRedirect: '/login' }),
+  passport.authenticate('instagram', { failureRedirect: '/' }),
   (req, res) => {
-    res.redirect('/mymedia');
+    res.redirect(`/mymedia?username=${req.user.username}`);
   });
 
 app.get('/logout', (req, res) => {

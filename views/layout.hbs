@@ -2,32 +2,29 @@
 <html>
   <head>
     <title>{{title}}</title>
-<!-- BOOTSTRAP -->
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+    <!-- BOOTSTRAP -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-
-<nav>
-<ul class="nav nav-pills">
-  
-  <li role="presentation" class="enabled"><a href="/">Home</a></li>
-  <li role="presentation" class="enabled"><a href="/signup">Signup</a></li>
-  <li role="presentation" class="enabled"><a href="/explore">Explore</a></li>
-  <li role="presentation" class="enabled"><a href="/mymedia">My Media</a></li>
-  <li role="presentation" class="enabled"><a href="/logout">Logout</a></li>
-  
-</ul>
-</nav>
-
-
-
-
+    <nav>
+      <ul class="nav nav-pills">
+        <li role="presentation" class="enabled"><a href="/">Home</a></li>
+        {{#unless user}}
+        <li role="presentation" class="enabled"><a href="/signup">Signup</a></li>
+        {{/unless}}
+        {{#if user}}
+        <li role="presentation" class="enabled"><a href="/mymedia">My Media</a></li>
+        <li role="presentation" class="enabled"><a href="/explore">Explore</a></li>
+        <li role="presentation" class="enabled"><a href="/logout">Logout</a></li>
+        {{/if}}
+      </ul>
+    </nav>
     {{{body}}}
     <footer></footer>
   </body>
