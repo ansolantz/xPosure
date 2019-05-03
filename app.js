@@ -1,4 +1,5 @@
-const createError = require('http-errors');
+'use strict';
+
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -7,15 +8,15 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const axios = require('axios');
 const MongoStore = require('connect-mongo')(session);
-const passport = require('./config/passport-config'); // passport module setup and initial load
+const passport = require('./config/passport-config');
 const InstagramStrategy = require('./config/passport-instagram-strategy');
 
-var indexRouter = require('./routes/index');
+const indexRouter = require('./routes/index');
 const exploreRouter = require('./routes/explore');
 const manageRouter = require('./routes/manage');
 
 mongoose
-  .connect('mongodb://localhost/instagram-auth', { useNewUrlParser: true })
+  .connect('mongodb://localhost/xposure', { useNewUrlParser: true })
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`);
   })
@@ -52,14 +53,24 @@ passport.use(InstagramStrategy);
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/', function (req, res) {
+// Simple route middleware to ensure user is authenticated.
+//   Use this route middleware on any resource that needs to be protected.  If
+//   the request is authenticated (typically via a persistent login session),
+//   the request will proceed.  Otherwise, the user will be redirected to the
+//   login page.
+const ensureAuthenticated = (req, res, next) => {
+  if (req.isAuthenticated()) { return next(); }
+  res.redirect('/login');
+};
+
+app.get('/', (req, res) => {
   res.render('home', { user: req.user });
 });
 
-app.get('/mymedia', ensureAuthenticated, function (req, res) {
+app.get('/mymedia', ensureAuthenticated, (req, res) => {
   console.log(req.user);
   axios.get(req.user.media)
-    .then(function (response) {
+    .then((response) => {
       const data = response.data.data;
       let user = req.user;
       user.images = data.map(img => img.images);
@@ -67,7 +78,7 @@ app.get('/mymedia', ensureAuthenticated, function (req, res) {
     });
 });
 
-app.get('/login', function (req, res) {
+app.get('/login', (req, res) => {
   res.render('login', { user: req.user });
 });
 
@@ -78,7 +89,7 @@ app.get('/login', function (req, res) {
 //   will redirect the user back to this application at /auth/instagram/callback
 app.get('/authenticate',
   passport.authenticate('instagram'),
-  function (req, res) {
+  (req, res) => {
     // The request will be redirected to Instagram for authentication, so this
     // function will not be called.
   });
@@ -90,26 +101,16 @@ app.get('/authenticate',
 //   which, in this example, will redirect the user to the home page.
 app.get('/auth/',
   passport.authenticate('instagram', { failureRedirect: '/login' }),
-  function (req, res) {
+  (req, res) => {
     res.redirect('/mymedia');
   });
 
-app.get('/logout', function (req, res) {
-  req.session.destroy(function (err) {
+app.get('/logout', (req, res) => {
+  req.session.destroy(() => {
     console.log('session destroyed');
   });
   req.logout();
   res.redirect('/');
 });
-
-// Simple route middleware to ensure user is authenticated.
-//   Use this route middleware on any resource that needs to be protected.  If
-//   the request is authenticated (typically via a persistent login session),
-//   the request will proceed.  Otherwise, the user will be redirected to the
-//   login page.
-function ensureAuthenticated (req, res, next) {
-  if (req.isAuthenticated()) { return next(); }
-  res.redirect('/login');
-}
 
 module.exports = app;
