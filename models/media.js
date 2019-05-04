@@ -10,13 +10,13 @@ const mediaSchema = new Schema({
   },
   meta: {
     media_type: String,
-    timestamp: true,
+    timestamp: Number,
     geolocation: [Number],
     camera: String,
     description: String
   },
   creatorId: String,
-  visibility: true,
+  visibility: Boolean,
   likes: [],
   saves: [],
   filtertags: []
