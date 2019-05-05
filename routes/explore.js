@@ -3,18 +3,36 @@
 const express = require('express');
 const router = express.Router();
 const Media = require('../models/media');
+const User = require('./../models/users');
 
 const ensureAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) { return next(); }
   res.redirect('/');
 };
 
-router.get('/', ensureAuthenticated, (req, res) => {
-  console.log('EXPLORE VIEW!!!');
+router.get('/:mediaId', ensureAuthenticated, (req, res) => {
+  const { mediaId } = req.params;
+  console.log('PHOTO VIEW!!!');
+  Media.findById(mediaId)
+    .then((photo) => {
+      console.log(photo);
 
+      let isLiked = false;
+      const { username } = req.user;
+      User.findOne({ username })
+        .then((user) => {
+          isLiked = user.likes.includes(mediaId);
+          res.render('photoview', { photo, user: req.user, isLiked });
+        })
+        .catch((err) => console.log(err));
+    })
+    .catch((err) => console.log(err));
+});
+
+router.get('/', ensureAuthenticated, (req, res) => {
   Media.find({})
     .then((allTheMediaFromDB) => {
-      console.log('All media:', allTheMediaFromDB);
+      // console.log('All media:', allTheMediaFromDB);
 
       res.render('exploreview', { allTheMediaFromDB, user: req.user });
     })

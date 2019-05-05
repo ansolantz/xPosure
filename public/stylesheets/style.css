@@ -29,6 +29,10 @@ a {
   flex-wrap: wrap;
 }
 
+.like_btn i  {
+  color: pink;
+}
+
 
 @media (max-width: 767px) {
   .explore-miniature{

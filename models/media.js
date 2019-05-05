@@ -12,7 +12,7 @@ const mediaSchema = new Schema({
     full_size: String
   }, */
   meta: {
-    type: [metaSchema]
+    type: metaSchema
   },
   creatorId: { type: Schema.Types.ObjectId, ref: 'User' },
   visibility: { type: Boolean, default: true },
