@@ -10,10 +10,10 @@ const mediaSchema = new Schema({
   /* url: {
     thumbnail: String,
     full_size: String
-  },
+  }, */
   meta: {
     type: [metaSchema]
-  }, */
+  },
   creatorId: { type: Schema.Types.ObjectId, ref: 'User' },
   visibility: { type: Boolean, default: true },
   likes: [],

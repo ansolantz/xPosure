@@ -2,7 +2,7 @@
 
 <div class="explore-view">
 {{#each allTheMediaFromDB}}
-<div class="explore-miniature"><a href="/photoview?_id={{this._id}}"><img class="img-fluid explore-image" src="{{this.url.full_size}}"></a></div>
+<div class="explore-miniature"><a href="/photoview?_id={{this._id}}"><img class="img-fluid explore-image" src="{{this.standard_resolution}}"></a></div>
 
 {{/each}}
 
