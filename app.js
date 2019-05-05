@@ -55,9 +55,8 @@ passport.use(InstagramStrategy);
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/', indexRouter);
+app.use('/auth', authRouter);
 app.use('/explore', exploreRouter);
 app.use('/manage', manageRouter);
-app.use('/auth', authRouter);
-
+app.use('/', indexRouter);
 module.exports = app;

@@ -1,22 +1,22 @@
 // bin/seed.js
 
 const mongoose = require('mongoose');
-const Book = require('../models/user');
+const User = require('../models/user');
 
 const dbName = 'xPosure';
 mongoose.connect(`mongodb://localhost/${dbName}`);
 
 const user = [
   {
-    firstName: "Test",
-    lastName: "Test",
-    email: "String",
-    username: "String",
-    passwordHash: "String",
+    firstName: 'Test',
+    lastName: 'Test',
+    email: 'String',
+    username: 'String',
+    passwordHash: 'String',
     profile: {
-      bio: "String",
-      image: "String",
-      location: "String"
+      bio: 'String',
+      image: 'String',
+      location: 'String'
     },
     media: [],
     followers: [],
@@ -29,11 +29,10 @@ const user = [
     }
   }
 
-]
-
+];
 
 User.create(user, (err) => {
-  if (err) { throw (err) }
-  console.log(`Created ${user.length} users`)
+  if (err) { throw (err); }
+  console.log(`Created ${user.length} users`);
   mongoose.connection.close();
 });
