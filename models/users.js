@@ -27,7 +27,7 @@ const userSchema = new Schema({
   saved: [],
   activityLog: [],
   timestamp: {
-    created_at: Date
+    createdAt: { type: Date, default: Date.now }
   }
 });
 

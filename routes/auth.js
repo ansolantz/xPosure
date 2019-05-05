@@ -9,6 +9,7 @@ const passport = require('./../config/passport-config');
 const InstagramStrategy = require('./../config/passport-instagram-strategy');
 passport.use(InstagramStrategy);
 const User = require('./../models/users');
+const Media = require('./../models/media');
 
 // This route shouldn't be called directly
 router.get('/auth', (req, res, next) => {
@@ -51,7 +52,7 @@ router.get('/instagram/callback',
         axios.get(media)
           .then((response) => {
             const data = response.data.data;
-            console.log('data', data);
+            // console.log('data', data);
             let user = req.user;
             user.images = data.map(img => img.images);
             user.images.forEach(image => {
@@ -60,8 +61,13 @@ router.get('/instagram/callback',
                   console.log('Issue uploading files to Cloudinary', error);
                 } else {
                   const { secure_url } = result;
-                  console.log('Username', username);
-                  console.log('Cloudinary upload result', result);
+                  User.findOne({ username: username })
+                    .then((user) => {
+                      Media.create({ standard_resolution: secure_url, creatorId: user._id })
+                        .then(() => console.log('Media inserted into the DB successfully'))
+                        .catch((error) => console.log('Error inserting media into the DB', error));
+                    })
+                    .catch((error) => console.log('Error finding user', error));
                 }
               });
             });

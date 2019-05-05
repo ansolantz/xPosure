@@ -6,13 +6,14 @@ const Schema = mongoose.Schema;
 const metaSchema = require('./metaSchema');
 
 const mediaSchema = new Schema({
-  url: {
+  standard_resolution: String,
+  /* url: {
     thumbnail: String,
     full_size: String
   },
   meta: {
     type: [metaSchema]
-  },
+  }, */
   creatorId: { type: Schema.Types.ObjectId, ref: 'User' },
   visibility: { type: Boolean, default: true },
   likes: [],
