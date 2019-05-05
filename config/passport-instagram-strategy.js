@@ -9,7 +9,6 @@ passport.use(new InstagramStrategy({
   callbackURL: 'http://localhost:3000/auth/instagram/callback'
 },
 (accessToken, refreshToken, profile, done) => {
-  console.log('profile', profile);
   let user = {};
   user.id = profile.id;
   user.username = profile.username;

@@ -4,6 +4,12 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
+  // USING INSTAGRAM SCHEMA
+  displayName: String,
+  homePage: String,
+  image: String,
+  bio: String,
+  // END OF USING INSTAGRAM SCHEMA
   firstName: String,
   lastName: String,
   email: String,
