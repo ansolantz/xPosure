@@ -3,6 +3,8 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
+const cloudinary = require('cloudinary').v2;
+const cloudinaryConfig = require('./../config/cloudinary-config');
 const passport = require('./../config/passport-config');
 const InstagramStrategy = require('./../config/passport-instagram-strategy');
 passport.use(InstagramStrategy);
@@ -35,7 +37,7 @@ router.get('/instagram/callback',
   passport.authenticate('instagram', { failureRedirect: '/' }),
   (req, res, next) => {
     const { username, displayName, homePage, image, bio, media } = req.user;
-    console.log(req.user);
+    // console.log(req.user);
 
     // Query the users collection and to check username and password
     User.findOne({ username })
@@ -43,21 +45,33 @@ router.get('/instagram/callback',
         // > if `username` already exists in the DB, redirect the user to their profile page
         if (user !== null) {
           res.redirect(`/${username}`);
+          return;
         }
 
         axios.get(media)
           .then((response) => {
             const data = response.data.data;
+            console.log('data', data);
             let user = req.user;
             user.images = data.map(img => img.images);
-            console.log('user images', user.images);
+            user.images.forEach(image => {
+              cloudinary.uploader.upload(image.standard_resolution.url, { folder: 'xposure', image_metadata: true }, (error, result) => {
+                if (error) {
+                  console.log('Issue uploading files to Cloudinary', error);
+                } else {
+                  const { secure_url } = result;
+                  console.log('Username', username);
+                  console.log('Cloudinary upload result', result);
+                }
+              });
+            });
           })
-          .catch((err) => console.log('Unable to retrieve media', err));
+          .catch((err) => console.log('Unable to retrieve media:', err));
 
         // > create new user and save their info to DB then redirect to their profile page
         User.create({ username, displayName, homePage, image, bio })
           .then(() => res.redirect(`/${username}`))
-          .catch((err) => console.log('Issue saving user to database', err));
+          .catch((err) => console.log('Issue saving user to database:', err));
 
       // catch errors from User.findOne
       }).catch((err) => next(err));

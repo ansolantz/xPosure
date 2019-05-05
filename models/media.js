@@ -3,23 +3,25 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const metaSchema = require('./metaSchema');
+
 const mediaSchema = new Schema({
   url: {
     thumbnail: String,
     full_size: String
   },
   meta: {
-    media_type: String,
-    timestamp: Number,
-    geolocation: [Number],
-    camera: String,
-    description: String
+    type: [metaSchema]
   },
-  creatorId: String,
-  visibility: Boolean,
+  creatorId: { type: Schema.Types.ObjectId, ref: 'User' },
+  visibility: { type: Boolean, default: true },
   likes: [],
   saves: [],
-  filtertags: []
+  tags: [],
+  timestamps: {
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now }
+  }
 });
 
 const Media = mongoose.model('Media', mediaSchema);
