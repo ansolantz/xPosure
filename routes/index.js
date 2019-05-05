@@ -42,17 +42,17 @@ const ensureAuthenticated = (req, res, next) => {
 
 router.get('/:username', ensureAuthenticated, (req, res) => {
   // console.log(req.user.media);
-  // axios.get(req.user.media)
-  //   .then((response) => {
-  //     // console.log('response', response);
-  //     const data = response.data.data;
-  //     let user = req.user;
-  //     user.images = data.map(img => img.images);
-  //     let imageIds = data.map(img => img.id); // Image IDs
-  //     // console.log('imageIds', imageIds);
-  //     res.render('mymedia', { user });
-  //   });
-  res.render('mymedia', { user: req.user });
+  axios.get(req.user.media)
+    .then((response) => {
+      // console.log('response', response);
+      const data = response.data.data;
+      let user = req.user;
+      user.images = data.map(img => img.images);
+      let imageIds = data.map(img => img.id); // Image IDs
+      // console.log('imageIds', imageIds);
+      res.render('mymedia', { user });
+    })
+    .catch((err) => console.log('Unable to retrieve media', err));
 });
 
 module.exports = router;

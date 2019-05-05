@@ -47,24 +47,20 @@ router.get('/instagram/callback',
 
         axios.get(media)
           .then((response) => {
-            // console.log('response', response);
             const data = response.data.data;
             let user = req.user;
             user.images = data.map(img => img.images);
-            let imageIds = data.map(img => img.id); // Image IDs
             console.log('user images', user.images);
-            // console.log('imageIds', imageIds);
-          });
+          })
+          .catch((err) => console.log('Unable to retrieve media', err));
 
         // > create new user and save their info to DB then redirect to their profile page
         User.create({ username, displayName, homePage, image, bio })
           .then(() => res.redirect(`/${username}`))
-          .catch((err) => console.log(err));
+          .catch((err) => console.log('Issue saving user to database', err));
 
       // catch errors from User.findOne
       }).catch((err) => next(err));
-
-    res.redirect(`/${req.user.username}`);
   }
 );
 
