@@ -3,8 +3,7 @@
 
 const mongoose = require('mongoose');
 const MediaData = require('../models/media');
-
-const dbName = 'xposure';
+const dbName = require('./../config/db');
 
 mongoose.connect(`mongodb://localhost/${dbName}`);
 

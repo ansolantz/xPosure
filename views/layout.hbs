@@ -19,7 +19,7 @@
         <li role="presentation" class="enabled"><a href="/signup">Signup</a></li>
         {{/unless}}
         {{#if user}}
-        <li role="presentation" class="enabled"><a href="/mymedia">My Media</a></li>
+        <li role="presentation" class="enabled"><a href="/{{user.username}}">My Profile</a></li>
         <li role="presentation" class="enabled"><a href="/explore">Explore</a></li>
         <li role="presentation" class="enabled"><a href="/logout">Logout</a></li>
         {{/if}}

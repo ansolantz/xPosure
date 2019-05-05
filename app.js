@@ -6,19 +6,20 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 const session = require('express-session');
-const axios = require('axios');
 const MongoStore = require('connect-mongo')(session);
 const passport = require('./config/passport-config');
 const InstagramStrategy = require('./config/passport-instagram-strategy');
+const dbName = require('./config/db');
 
 const indexRouter = require('./routes/index');
+const authRouter = require('./routes/auth');
 const exploreRouter = require('./routes/explore');
 const manageRouter = require('./routes/manage');
 
 mongoose
-  .connect('mongodb://localhost/xposure', { useNewUrlParser: true })
+  .connect(`mongodb://localhost/${dbName}`, { useNewUrlParser: true })
   .then(x => {
-    console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`);
+    console.log(`Connected to Mongo! Database name: "${dbName}"`);
   })
   .catch(err => {
     console.error('Error connecting to mongo', err);
@@ -38,79 +39,25 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Instagram config
 app.use(session({
+  secret: 'THIS IS MY SECRET',
+  cookie: { maxAge: 3600000 * 1 }, // 1 hour
+  resave: true,
+  saveUninitialized: false,
   store: new MongoStore({
     mongooseConnection: mongoose.connection,
     // ttl: 24 * 60 * 60 // 1 day
     // ttl: 3600 // 1 hour
     ttl: 600 // 10 minutes
-  }),
-  secret: 'THIS IS MY SECRET',
-  resave: false,
-  saveUninitialized: false
+  })
 }));
 
 passport.use(InstagramStrategy);
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Simple route middleware to ensure user is authenticated.
-//   Use this route middleware on any resource that needs to be protected.  If
-//   the request is authenticated (typically via a persistent login session),
-//   the request will proceed.  Otherwise, the user will be redirected to the
-//   login page.
-const ensureAuthenticated = (req, res, next) => {
-  if (req.isAuthenticated()) { return next(); }
-  res.redirect('/');
-};
-
-app.get('/', (req, res) => {
-  res.render('home', { user: req.user });
-});
-
-app.get('/mymedia', ensureAuthenticated, (req, res) => {
-  console.log(req.user);
-  axios.get(req.user.media)
-    .then((response) => {
-      const data = response.data.data;
-      let user = req.user;
-      user.images = data.map(img => img.images);
-      res.render('mymedia', { user });
-    });
-});
-
-app.get('/login', (req, res) => {
-  res.render('login', { user: req.user });
-});
-
-// GET /auth/instagram
-//   Use passport.authenticate() as route middleware to authenticate the
-//   request.  The first step in Instagram authentication will involve
-//   redirecting the user to instagram.com.  After authorization, Instagram
-//   will redirect the user back to this application at /auth/instagram/callback
-app.get('/authenticate',
-  passport.authenticate('instagram'),
-  (req, res) => {
-    // The request will be redirected to Instagram for authentication, so this
-    // function will not be called.
-  });
-
-// GET /auth/instagram/callback
-//   Use passport.authenticate() as route middleware to authenticate the
-//   request.  If authentication fails, the user will be redirected back to the
-//   login page.  Otherwise, the primary route function function will be called,
-//   which, in this example, will redirect the user to the home page.
-app.get('/auth/',
-  passport.authenticate('instagram', { failureRedirect: '/' }),
-  (req, res) => {
-    res.redirect(`/mymedia?username=${req.user.username}`);
-  });
-
-app.get('/logout', (req, res) => {
-  req.session.destroy(() => {
-    console.log('session destroyed');
-  });
-  req.logout();
-  res.redirect('/');
-});
+app.use('/', indexRouter);
+app.use('/explore', exploreRouter);
+app.use('/manage', manageRouter);
+app.use('/auth', authRouter);
 
 module.exports = app;

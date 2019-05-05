@@ -5,8 +5,8 @@ const InstagramStrategy = require('passport-instagram').Strategy;
 
 passport.use(new InstagramStrategy({
   clientID: 'feef7763763f446e98b94c6caf272f42',
-  clientSecret: '19f367559639413195fb74aea9ec0fd5',
-  callbackURL: 'http://localhost:3000/auth'
+  clientSecret: 'e94d86e57aa04ab5a8faaf29d28e2ba0',
+  callbackURL: 'http://localhost:3000/auth/instagram/callback'
 },
 (accessToken, refreshToken, profile, done) => {
   console.log('profile', profile);
