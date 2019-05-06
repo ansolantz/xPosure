@@ -9,7 +9,7 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const passport = require('./config/passport-config');
 const InstagramStrategy = require('./config/passport-instagram-strategy');
-const dbName = require('./config/db');
+const { dbName, dbUrl } = require('./config/db');
 
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
@@ -17,7 +17,8 @@ const exploreRouter = require('./routes/explore');
 const manageRouter = require('./routes/manage');
 
 mongoose
-  .connect(`mongodb://localhost/${dbName}`, { useNewUrlParser: true })
+  // .connect(`mongodb://localhost/${dbName}`, { useNewUrlParser: true })
+  .connect(`${dbUrl}`, { useNewUrlParser: true })
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${dbName}"`);
   })
