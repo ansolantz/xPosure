@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "bcrypt": "^3.0.6",
     "cloudinary": "^1.14.0",
     "connect-mongo": "^2.0.3",
     "cookie-parser": "~1.4.3",
@@ -23,7 +24,8 @@
     "multer-storage-cloudinary": "^2.2.1",
     "npm": "^6.9.0",
     "passport": "^0.4.0",
-    "passport-instagram": "^1.0.0"
+    "passport-instagram": "^1.0.0",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "eslint": "^5.16.0",
