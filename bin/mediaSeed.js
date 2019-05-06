@@ -21,7 +21,7 @@ const mediaData = [
       camera: 'iPhone',
       description: 'Miami beach...'
     },
-    creatorId: '5ccf17b7a96a72431b18c104',
+    creatorId: '5ccebc1a0208e33273eeae7d',
     visibility: true,
     likes: [],
     saves: [],
@@ -40,7 +40,7 @@ const mediaData = [
       camera: 'iPhone',
       description: 'Ocean drive'
     },
-    creatorId: '5ccf17b7a96a72431b18c104',
+    creatorId: '5ccebc1a0208e33273eeae7d',
     visibility: true,
     likes: [],
     saves: [],
@@ -59,7 +59,7 @@ const mediaData = [
       camera: 'iPhone',
       description: 'Barcelona beach'
     },
-    creatorId: '5ccf17b7a96a72431b18c104',
+    creatorId: '5ccebc1a0208e33273eeae7d',
     visibility: true,
     likes: [],
     saves: [],
@@ -78,7 +78,7 @@ const mediaData = [
       camera: 'iPhone',
       description: 'Semla'
     },
-    creatorId: '5ccf17b7a96a72431b18c104',
+    creatorId: '5ccebc1a0208e33273eeae7d',
     visibility: true,
     likes: [],
     saves: [],
@@ -98,7 +98,7 @@ const mediaData = [
       camera: 'iPhone',
       description: 'Spring in Barcelona'
     },
-    creatorId: '5ccf17b7a96a72431b18c104',
+    creatorId: '5ccebc1a0208e33273eeae7d',
     visibility: true,
     likes: [],
     saves: [],
@@ -117,7 +117,7 @@ const mediaData = [
       camera: 'iPhone',
       description: 'Ocean drive'
     },
-    creatorId: '5ccf17b7a96a72431b18c104',
+    creatorId: '5ccebc1a0208e33273eeae7d',
     visibility: true,
     likes: [],
     saves: [],
