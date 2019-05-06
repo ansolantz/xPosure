@@ -94,6 +94,27 @@ router.get('/logout', (req, res) => {
   res.redirect('/');
 });
 
+router.get('/upload', ensureAuthenticated, (req, res) => {
+  let user = req.user;
+  res.render('upload', { user });
+});
+
+router.post('/upload', parser.single('image'), (req, res) => {
+  let imageUrl = '';
+  let user = req.user;
+
+  if (req.file) {
+    imageUrl = req.file.secure_url;
+  }
+
+  User.findOne({ username: user.username })
+    .then((dbUser) => {
+      Media.create({ standard_resolution: imageUrl, creatorId: dbUser._id })
+        .then(() => res.redirect(`/${dbUser.username}/`));
+    })
+    .catch((error) => console.log('Error finding authenticated user', error));
+});
+
 /* GET /:username */
 
 router.get('/:username', ensureAuthenticated, (req, res) => {
@@ -132,27 +153,6 @@ router.get('/:username', ensureAuthenticated, (req, res) => {
       // res.render('mymedia', { media, user });
     })
     .catch((err) => console.log(err));
-});
-
-router.get('/:username/upload', ensureAuthenticated, (req, res) => {
-  let user = req.user;
-  res.render('upload', { user });
-});
-
-router.post('/:username/upload', parser.single('image'), (req, res) => {
-  let imageUrl = '';
-  let user = req.user;
-
-  if (req.file) {
-    imageUrl = req.file.secure_url;
-  }
-
-  User.findOne({ username: user.username })
-    .then((dbUser) => {
-      Media.create({ standard_resolution: imageUrl, creatorId: dbUser._id })
-        .then(() => res.redirect(`/${dbUser.username}/`));
-    })
-    .catch((error) => console.log('Error finding authenticated user', error));
 });
 
 module.exports = router;
