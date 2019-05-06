@@ -9,6 +9,7 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const passport = require('./config/passport-config');
 const InstagramStrategy = require('./config/passport-instagram-strategy');
+const LocalStrategy = require('./config/passport-local-strategy');
 const { dbName, dbUrl } = require('./config/db');
 
 const indexRouter = require('./routes/index');
@@ -53,6 +54,7 @@ app.use(session({
 }));
 
 passport.use(InstagramStrategy);
+passport.use(LocalStrategy);
 app.use(passport.initialize());
 app.use(passport.session());
 

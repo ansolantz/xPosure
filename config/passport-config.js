@@ -8,7 +8,11 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((obj, done) => {
-  done(null, obj);
+  User.findOne({ username: obj.username })
+    .then((userObj) => {
+      done(null, userObj);
+    })
+    .catch((err) => done('Issue deserialising user', err));
 });
 
 module.exports = passport;

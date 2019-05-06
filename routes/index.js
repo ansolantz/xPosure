@@ -3,11 +3,13 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
+const passport = require('passport');
+const parser = require('./../config/multer');
+const bcrypt = require('bcrypt');
 
 const User = require('./../models/users');
 const Media = require('./../models/media');
-const parser = require('./../config/multer');
-const bcrypt = require('bcrypt');
+
 const bcryptSalt = 10;
 
 // Simple route middleware to ensure user is authenticated.
@@ -20,7 +22,6 @@ const ensureAuthenticated = (req, res, next) => {
   res.redirect('/');
 };
 
-
 /* GET / */
 router.get('/', (req, res, next) => {
   res.render('home', { user: req.user });
@@ -31,13 +32,29 @@ router.get('/login', (req, res, next) => {
   res.render('login');
 });
 
+/* POST /login */
+router.post('/login', passport.authenticate('local', { failureRedirect: '/' }),
+  (req, res, next) => {
+    const { username } = req.user;
+
+    // Query the users collection and to check username and password
+    User.findOne({ username })
+      .then((user) => {
+      // > if `username` already exists in the DB, redirect the user to their profile page
+        if (user !== null) {
+          res.redirect(`/${username}`);
+        }
+      });
+  }
+);
+
 /* GET /signup */
 router.get('/signup', (req, res, next) => {
   res.render('signup');
 });
 
 // POST  '/signup'
-router.post('/signup', ensureAuthenticated, (req, res, next) => {
+router.post('/signup', (req, res, next) => {
   const { username, password } = req.body;
 
   if (username === '' && password === '') {
@@ -61,12 +78,9 @@ router.post('/signup', ensureAuthenticated, (req, res, next) => {
       const salt = bcrypt.genSaltSync(bcryptSalt);
       const hashPass = bcrypt.hashSync(password, salt);
 
-      const newUser = new User({ username, passwordHash: hashPass });
-
-      newUser.save((err) => {
-        if (err) res.render('signup', { message: 'Oops, something went wrong. Please try again.' });
-        else res.redirect('/', { message: username });
-      });
+      User.create({ username, passwordHash: hashPass })
+        .then(() => res.redirect('/'))
+        .catch((err) => res.render('signup', err, { message: 'Oops, something went wrong. Please try again.' }));
     })
     .catch(error => next(error));
 });
