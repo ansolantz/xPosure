@@ -1,8 +1,59 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
 }
 
+
+body {
+  margin: 0;
+  padding: 0;
+  padding: 50px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+}
+h1{
+  font-size: 21px;
+  font-weight: 600;
+  color: #414141;
+}
 a {
   color: #00B7FF;
 }
+.explore-view{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.like_btn i  {
+  color: pink;
+}
+
+
+@media (max-width: 767px) {
+  .explore-miniature{
+    flex: 0 0 33%;
+    max-width: 33%;
+   }
+}
+
+@media (min-width: 768px) {
+  .explore-miniature{
+    flex: 0 0 25%;
+    max-width: 25%;
+   }
+}
+
+
+.explore-image{
+  /*width: 50%;*/
+  max-width: 100%; 
+  height: auto;
+  border: 1px solid #eaeaea;
+}
+
+

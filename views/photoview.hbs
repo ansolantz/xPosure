@@ -1,0 +1,21 @@
+<h2>Photo view</h2>
+
+<div class="card" style="width: 100%;">
+  <img class="card-img-top" src="{{this.photo.standard_resolution}}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{this.photo.meta.description}}</h5>
+    <p class="card-text">{{this.photo.meta.description}}</p>
+
+
+    {{#if isLiked}}
+        <a href="#" class="like_btn"><i class="fas fa-heart"></i></a>
+    {{else}}
+        <a href="#" class="like_btn"><i class="far fa-heart"></i></a>
+    {{/if}}
+
+    {{!-- <a href="#" class="card-link">Card link</a>
+    <a href="#" class="card-link">Another link</a>
+    <a href="#" class="btn btn-primary">Go somewhere</a> --}}
+  </div>
+</div>
+
