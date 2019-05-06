@@ -3,9 +3,9 @@
 const express = require('express');
 const router = express.Router();
 
-/* GET home page. */
+/* GET /manage */
 
-router.get('/mymedia', (req, res, next) => {
+router.get('/', (req, res, next) => {
   res.render('mymedia');
 });
 

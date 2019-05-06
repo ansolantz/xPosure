@@ -3,6 +3,9 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
+const User = require('./../models/users');
+const Media = require('./../models/media');
+const parser = require('./../config/multer');
 
 /* GET / */
 router.get('/', (req, res, next) => {
@@ -53,6 +56,27 @@ router.get('/:username', ensureAuthenticated, (req, res) => {
       res.render('mymedia', { user });
     })
     .catch((err) => console.log('Unable to retrieve media', err));
+});
+
+router.get('/:username/upload', ensureAuthenticated, (req, res) => {
+  let user = req.user;
+  res.render('upload', { user });
+});
+
+router.post('/:username/upload', parser.single('image'), (req, res) => {
+  let imageUrl = '';
+  let user = req.user;
+
+  if (req.file) {
+    imageUrl = req.file.secure_url;
+  }
+
+  User.findOne({ username: user.username })
+    .then((dbUser) => {
+      Media.create({ standard_resolution: imageUrl, creatorId: dbUser._id })
+        .then(() => res.redirect(`/${dbUser.username}/`));
+    })
+    .catch((error) => console.log('Error finding authenticated user', error));
 });
 
 module.exports = router;
