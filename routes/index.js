@@ -3,6 +3,7 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
+
 const User = require('./../models/users');
 const Media = require('./../models/media');
 const parser = require('./../config/multer');
@@ -18,6 +19,7 @@ const ensureAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) { return next(); }
   res.redirect('/');
 };
+
 
 /* GET / */
 router.get('/', (req, res, next) => {
@@ -81,18 +83,41 @@ router.get('/logout', (req, res) => {
 /* GET /:username */
 
 router.get('/:username', ensureAuthenticated, (req, res) => {
-  // console.log(req.user.media);
   axios.get(req.user.media)
     .then((response) => {
-      // console.log('response', response);
+    // console.log('response', response);
       const data = response.data.data;
       let user = req.user;
       user.images = data.map(img => img.images);
-      let imageIds = data.map(img => img.id); // Image IDs
+      // let imageIds = data.map(img => img.id); // Image IDs
       // console.log('imageIds', imageIds);
-      res.render('mymedia', { user });
+      // res.render('mymedia', { user });
     })
     .catch((err) => console.log('Unable to retrieve media', err));
+  // console.log(req.user.media);
+
+  const { username } = req.user;
+  User.findOne({ username })
+    .then((dbUser) => {
+      console.log('USER NAME', username);
+      console.log('USER ID', dbUser.id);
+      // console.log(user._id);
+
+      // {creatorId: user.id}
+
+      Media.find({ creatorId: dbUser.id })
+        .then((mediaByUser) => {
+          // res.render('mymedia', { media, user: req.user });
+          console.log('USER ID', dbUser.id);
+          console.log('MEDIA BY USER ', mediaByUser);
+          res.render('mymedia', { mediaByUser, dbUser, user: req.user });
+          // res.render('mymedia', { dbUser });
+        })
+        .catch((err) => console.log(err));
+
+      // res.render('mymedia', { media, user });
+    })
+    .catch((err) => console.log(err));
 });
 
 router.get('/:username/upload', ensureAuthenticated, (req, res) => {
