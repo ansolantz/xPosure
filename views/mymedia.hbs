@@ -1,4 +1,4 @@
-<h1>My media</h1>
+{{!-- <h1>My media page</h1>
 <p>ID: {{ user.id }}</p>
 <p>Username: {{ user.username }}</p>
 <p>Name: {{ user.displayName }}</p>
@@ -7,4 +7,39 @@
 <img src="{{user.image}}"/>
 {{#each user.images }}
   <a href="{{this.standard_resolution.url}}"><img src="{{this.thumbnail.url}}"></a>
+{{/each}} --}}
+{{!-- 
+<div class="card" style="width: 100%;">
+  <img class="card-img-top rounded-circle profile-pic" src="{{dbUser.image}}"  alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{ dbUser.displayName }}</h5>
+    <p class="card-text">{{ dbUser.bio }}</p>
+   <p class="card-text"></p> <a href="{{ dbUser.homePage }}" target="_blank" rel="noopener">{{ user.homePage }}</a></p>
+    <a href="#" class="btn btn-primary">Edit</a>
+  </div>
+</div> --}}
+
+
+{{!-- <h1>{{ dbUser.username }}</h1> --}}
+{{!-- <p>ID: {{ dbUser.id }}</p> --}}
+<div class="user-info">
+  <div class="text-area">
+    <h1>{{ dbUser.displayName }}</h1>
+    <div>{{ dbUser.bio }}</div>
+    <a href="{{ dbUser.homePage }}" target="_blank" rel="noopener">{{ user.homePage }}</a>
+  </div>
+  <div class="picture-area">
+    <div><img src="{{dbUser.image}}" class="rounded-circle profile-pic" alt="{{dbUser.image}}"></div>
+  </div>
+</div>
+<form action="/profileedit/{{ dbUser.id }}">
+<button type="submit" class="btn btn-outline-secondary btn-sm btn-block">Edit profile</button>
+</form>
+
+
+<div class="user-media-view">
+{{#each mediaByUser}}
+<div class="user-media-miniature"><a href="explore/{{this._id}}">
+<img class="img-fluid explore-image" src="{{this.standard_resolution}}"></a></div>
 {{/each}}
+</div>

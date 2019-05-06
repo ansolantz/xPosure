@@ -34,15 +34,58 @@ a {
 }
 
 
+.user-media-view{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.like_btn i  {
+  color: pink;
+}
+
+.profile-pic{
+  width: 60px;
+}
+.user-info{
+  display: flex;
+  flex-direction: row;
+  padding:10px;
+  border: 1px solid #eaeaea;
+}
+
+.text-area{
+  flex: 0 0 70%;
+}
+
+.picture-area{
+  flex: 0 0 30%;
+  padding: 3px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn{
+  margin: 5px 0 5px 0;
+  border: 1px solid #eaeaea;
+}
+
 @media (max-width: 767px) {
   .explore-miniature{
-    flex: 0 0 33%;
-    max-width: 33%;
+    flex: 0 0 33.3%;
+    max-width: 33.3%;
+   }
+   .user-media-miniature{
+    flex: 0 0 33.3%;
+    max-width: 33.3%;
    }
 }
 
 @media (min-width: 768px) {
   .explore-miniature{
+    flex: 0 0 25%;
+    max-width: 25%;
+   }
+   .user-media-miniature{
     flex: 0 0 25%;
     max-width: 25%;
    }
