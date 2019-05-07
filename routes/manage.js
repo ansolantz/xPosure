@@ -16,24 +16,6 @@ const ensureAuthenticated = (req, res, next) => {
 //   res.render('mymedia');
 // });
 
-router.get('/:mediaId', ensureAuthenticated, (req, res) => {
-  console.log('MEDIA EDIT PAGE');
-  const { mediaId } = req.params;
-
-  Media.findById(mediaId)
-    .then((dbMedia) => {
-      // console.log(dbMedia);
-
-      const { username } = req.user;
-      User.findOne({ username })
-        .then((dbUser) => {
-          res.render('mediaedit', { dbMedia, dbUser, user: req.user });
-        })
-        .catch((err) => console.log(err));
-    })
-    .catch((err) => console.log(err));
-});
-
 /* GET /manage/profile */
 
 router.get('/profile', ensureAuthenticated, (req, res, next) => {
@@ -82,9 +64,9 @@ router.post('/edit', ensureAuthenticated, (req, res) => {
   Media.findOneAndUpdate({ _id }, { $set: { meta: { description } } }, { new: true })
   // Media.findOne({ _id })
     .then((dbMedia) => {
-      // console.log('Meta description:', dbMedia.meta.description);
-      // dbMedia.meta.description = description;
-      // dbMedia.save();
+    // console.log('Meta description:', dbMedia.meta.description);
+    // dbMedia.meta.description = description;
+    // dbMedia.save();
       const { username } = req.user;
       User.findOne({ username })
         .then((dbUser) => {
@@ -97,6 +79,24 @@ router.post('/edit', ensureAuthenticated, (req, res) => {
 
           res.render('photoview', { dbMedia, dbUser, user: req.user, isLiked, isEditable });
           // res.render('photoview', { dbMedia, dbUser, user: req.user });
+        })
+        .catch((err) => console.log(err));
+    })
+    .catch((err) => console.log(err));
+});
+
+router.get('/:mediaId', ensureAuthenticated, (req, res) => {
+  console.log('MEDIA EDIT PAGE');
+  const { mediaId } = req.params;
+
+  Media.findById(mediaId)
+    .then((dbMedia) => {
+      // console.log(dbMedia);
+
+      const { username } = req.user;
+      User.findOne({ username })
+        .then((dbUser) => {
+          res.render('mediaedit', { dbMedia, dbUser, user: req.user });
         })
         .catch((err) => console.log(err));
     })
