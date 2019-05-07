@@ -4,25 +4,17 @@
 <div class="card" style="width: 100%;">
   <img class="card-img-top" src="{{this.dbMedia.standard_resolution}}" alt="Card image cap">
   <div class="card-body">
-   
     <h5 class="card-title">{{this.dbMedia.meta.description}}</h5>
- 
     {{#if isLiked}}
-        <a href="#" class="like_btn"><i class="fas fa-heart" id="heart-icon"  data-imageid="{{this.dbMedia._id}}"></i></a>
-   
+      <a href="#" class="like_btn"><i class="fas fa-heart" id="heart-icon"  data-imageid="{{this.dbMedia._id}}"></i></a>
     {{else}}
-        <a href="#" class="like_btn"><i class="far fa-heart" id="heart-icon" data-imageid="{{this.dbMedia._id}}"></i></a>
+      <a href="#" class="like_btn"><i class="far fa-heart" id="heart-icon" data-imageid="{{this.dbMedia._id}}"></i></a>
     {{/if}}
-
     <div>
-
-        {{#if isEditable}}
-        <a href="/manage/{{this.dbMedia._id}}" role="button" class="btn btn-outline-secondary btn-sm btn-block">Edit</a>
-
+    {{#if isEditable}}
+      <a href="/manage/{{this.dbMedia._id}}" role="button" class="btn btn-outline-secondary btn-sm btn-block">Edit</a>
     {{/if}}
-
-     
-  </div>
+    </div>
   </div>
   
 </div>

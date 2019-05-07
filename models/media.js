@@ -7,6 +7,7 @@ const metaSchema = require('./metaSchema');
 
 const mediaSchema = new Schema({
   standard_resolution: String,
+  cloudId: String,
   /* url: {
     thumbnail: String,
     full_size: String

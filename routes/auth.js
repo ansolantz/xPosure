@@ -49,10 +49,10 @@ router.get('/instagram/callback',
                 if (error) {
                   console.log('Issue uploading files to Cloudinary', error);
                 } else {
-                  const { secure_url } = result;
+                  const { secure_url, public_id } = result;
                   User.findOne({ username: username })
                     .then((user) => {
-                      Media.create({ standard_resolution: secure_url, creatorId: user._id })
+                      Media.create({ standard_resolution: secure_url, cloudId: public_id, creatorId: user._id })
                         .then(() => console.log('Media inserted into the DB successfully'))
                         .catch((error) => console.log('Error inserting media into the DB', error));
                     })

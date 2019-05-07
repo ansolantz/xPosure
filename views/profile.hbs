@@ -13,9 +13,9 @@
     <label for="homepageInput">Website</label>
     <input type="text" class="form-control" name="homePage" id="homePage" value="{{user.homePage}}">
   </div>
-  <button type="submit" class="btn btn-primary btn-block">Submit</button>
+  <button type="submit" class="btn btn-primary btn-block">Save changes</button>
 </form>
-<form action="/manage/delete" method="post">
+<form action="/manage/delete/user" method="post">
   <input type="hidden" name="_id" value="{{user._id}}">
-  <button type="submit" class="btn btn-danger btn-block">Delete account</button>
+  <button type="submit" class="btn btn-outline-danger btn-block">Delete account</button>
 </form>
