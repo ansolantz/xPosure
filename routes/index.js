@@ -73,7 +73,7 @@ router.post('/signup', (req, res, next) => {
       const hashPass = bcrypt.hashSync(password, salt);
 
       User.create({ username, passwordHash: hashPass })
-        .then(() => res.redirect(`/${username}`))
+        .then(() => res.redirect(`/`))
         .catch((err) => res.render('signup', err, { message: 'Oops, something went wrong. Please try again.' }));
     })
     .catch(error => next(error));
@@ -94,15 +94,18 @@ router.get('/upload', ensureAuthenticated, (req, res) => {
 
 router.post('/upload', parser.single('image'), (req, res) => {
   let imageUrl = '';
+  let cloudId = '';
   let user = req.user;
 
   if (req.file) {
+    console.log('req.file', req.file);
     imageUrl = req.file.secure_url;
+    cloudId = req.file.public_id;
   }
-
+  console.log('cloudId', cloudId);
   User.findOne({ username: user.username })
     .then((dbUser) => {
-      Media.create({ standard_resolution: imageUrl, creatorId: dbUser._id })
+      Media.create({ standard_resolution: imageUrl, cloudId, creatorId: dbUser._id })
         .then(() => res.redirect(`/${dbUser.username}/`));
     })
     .catch((error) => console.log('Error finding authenticated user', error));
@@ -113,7 +116,7 @@ router.get('/:username', (req, res) => {
   const { username } = req.params;
   User.findOne({ username })
     .then((dbUser) => {
-      Media.find({ creatorId: dbUser.id })
+      Media.find({ creatorId: dbUser._id })
         .then((mediaByUser) => {
           res.render('mymedia', { mediaByUser, dbUser, user: req.user });
         })

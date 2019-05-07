@@ -2,6 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
+const cloudinary = require('cloudinary');
 const User = require('./../models/users');
 const Media = require('./../models/media');
 
@@ -33,17 +34,34 @@ router.post('/profile', (req, res, next) => {
     .catch((error) => console.log('Error updating user profile to DB', error));
 });
 
-/* POST /manage/delete/:userId */
+/* POST /manage/delete/user */
 
-router.post('/delete', ensureAuthenticated, (req, res, next) => {
+router.post('/delete/user', ensureAuthenticated, (req, res, next) => {
   const { _id } = req.body;
   User.deleteOne({ _id })
     .then(() => {
+      const media = Media.find({ creatorId: _id }, 'cloudId');
       Media.deleteMany({ creatorId: _id })
+        .then(() => {
+          console.log(media);
+          cloudinary.v2.api.delete_resources(media, (error, result) => console.log(result, error));
+        })
         .then(() => res.redirect('/logout'))
         .catch(() => console.log('Unable to delete user\'s media'));
     })
     .catch((error) => console.log('Unable to delete user account', error));
+});
+
+/* POST /manage/delete/media */
+
+router.post('/delete/media', ensureAuthenticated, (req, res, next) => {
+  const { _id } = req.body;
+  const user = req.user;
+  Media.findById({ _id })
+    .then((media) => cloudinary.v2.uploader.destroy(media.cloudId, (error, result) => { console.log(result, error); }))
+    .then(() => Media.deleteOne({ _id }))
+    .then(() => res.redirect(`/${user.username}`))
+    .catch((error) => console.log('Unable to delete media', error));
 });
 
 /* POST /manage/edit/:mediaId */

@@ -6,15 +6,16 @@
   
 
   <div class="card-body">
-   <form action="/manage/edit?_id={{this.dbMedia._id}}" method="POST">
-
-  
-    <input type="text" class="update-form" name="description" value="{{this.dbMedia.meta.description}}">
-
-    <button type="submit" class="btn btn-outline-secondary btn-sm btn-block">Edit photo</button>
+   <form action="/manage/edit?_id={{this.dbMedia._id}}" method="post">
+    <div class="form-group">
+      <input type="text" class="form-control" id="description" name="description" placeholder="Enter a description" value="{{this.dbMedia.meta.description}}">
+    </div>
+    <button type="submit" class="btn btn-outline-secondary btn-sm btn-block">Save changes</button>
   </form>
-
-   <a href="#" role="button"class="btn btn-outline-danger btn-sm btn-block">Delete this photo</a>
+  <form action="/manage/delete/media" method="post">
+    <input type="hidden" name="_id" value="{{this.dbMedia._id}}">
+    <button type="submit" class="btn btn-outline-danger btn-sm btn-block">Delete photo</button>
+  </form>
   </div>
   
 </div>
