@@ -1,8 +1,147 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
 }
 
+
+body {
+  margin: 0;
+  padding: 0;
+  padding: 50px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  padding-top: 70px;
+}
+
+h1{
+  font-size: 21px;
+  font-weight: 600;
+  color: #414141;
+}
 a {
   color: #00B7FF;
 }
+.explore-view{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.like_btn i  {
+  color: pink;
+  font-size: 20px;
+}
+
+
+.user-media-view{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.like_btn i  {
+  color: pink;
+}
+
+.profile-pic{
+  width: 60px;
+}
+.user-info{
+  display: flex;
+  flex-direction: row;
+  padding:10px;
+  border: 1px solid #eaeaea;
+}
+
+.text-area{
+  flex: 0 0 70%;
+}
+
+.picture-area{
+  flex: 0 0 30%;
+  padding: 3px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn{
+  margin: 5px 0 5px 0;
+  border: 1px solid #eaeaea;
+}
+
+@media (max-width: 767px) {
+  .explore-miniature{
+    flex: 0 0 33.3%;
+    max-width: 33.3%;
+   }
+   .user-media-miniature{
+    flex: 0 0 33.3%;
+    max-width: 33.3%;
+   }
+}
+
+@media (min-width: 768px) {
+  .explore-miniature{
+    flex: 0 0 25%;
+    max-width: 25%;
+   }
+   .user-media-miniature{
+    flex: 0 0 25%;
+    max-width: 25%;
+   }
+}
+
+
+.explore-image{
+  /*width: 50%;*/
+  max-width: 100%; 
+  height: auto;
+  border: 1px solid #eaeaea;
+}
+
+
+
+  .navbar {
+    font-size: 4vh;
+  }
+
+  .sticky-top {
+    font-size: 2vh;
+  }
+
+  body {
+    padding: 0;
+  }
+
+  .justify-content-end {
+    margin-right: 0;
+  }
+
+  .home-image {
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+    background-image: url("http://www.speakeasybcn.com/blog/wp-content/uploads/2018/03/@elenasarinena-born.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center; 
+    overflow: hidden;
+
+  }
+
+  .d-flex {
+    justify-content: center;
+    align-content: center;
+  }
+
+  .home {
+    height: 50%;
+    margin-top: 30%
+  }
+
+  .jumbotron {
+    background-color: rgba(243, 237, 237, 0.788);
+  }
