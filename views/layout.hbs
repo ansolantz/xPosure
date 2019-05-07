@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
   <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel="shortcut icon" type="image/png" href="/favicon.ico">
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
@@ -34,10 +35,10 @@
 {{#if user}}
 <nav class="navbar fixed-bottom navbar-light bg-light">
   <div class="container">
+      <a class="nav-link active" href="/{{user.username}}"><i class="fas fa-home"></i></a>
       <a class="nav-link active" href="/upload"><i class="fas fa-file-upload"></i></a>
-      <a class="nav-link active" href="/{{user.username}}"><i class="far fa-images"></i></a>
-      <a class="nav-link active" href="/explore"><i class="fas fa-home"></i></a>
-      <a class="nav-link active" href="/mapexplore"><i class="fas fa-map-marked-alt"></i></span></a>
+      <a class="nav-link active" href="/explore"><i class="far fa-images"></i></a>
+      <!-- <a class="nav-link active" href="/mapexplore"><i class="fas fa-map-marked-alt"></i></span></a> -->
     </div>
   </nav>
 {{/if}}
