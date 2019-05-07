@@ -23,12 +23,7 @@ const ensureAuthenticated = (req, res, next) => {
 
 /* GET / */
 router.get('/', (req, res, next) => {
-  res.render('home', { user: req.user });
-});
-
-/* GET /login */
-router.get('/login', (req, res, next) => {
-  res.render('login');
+  res.render('home', { user: req.user, title: 'xPosure' });
 });
 
 /* POST /login */
@@ -78,7 +73,7 @@ router.post('/signup', (req, res, next) => {
       const hashPass = bcrypt.hashSync(password, salt);
 
       User.create({ username, passwordHash: hashPass })
-        .then(() => res.redirect('/'))
+        .then(() => res.redirect(`/${username}`))
         .catch((err) => res.render('signup', err, { message: 'Oops, something went wrong. Please try again.' }));
     })
     .catch(error => next(error));
@@ -87,9 +82,8 @@ router.post('/signup', (req, res, next) => {
 /* GET /logout */
 router.get('/logout', (req, res) => {
   req.session.destroy(() => {
-    console.log('session destroyed');
+    req.logout();
   });
-  req.logout();
   res.redirect('/');
 });
 

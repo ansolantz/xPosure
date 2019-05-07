@@ -42,10 +42,9 @@ router.post('/profile', (req, res, next) => {
 router.post('/delete', ensureAuthenticated, (req, res, next) => {
   const { _id } = req.body;
   User.deleteOne({ _id })
-    .then((user) => console.log('Deleted account for ', user._id))
-    .then((user) => {
+    .then(() => {
       Media.deleteMany({ creatorId: _id })
-        .then(() => console.log(user.username, '\'s media has been deleted'))
+        .then(() => res.redirect('/logout'))
         .catch(() => console.log('Unable to delete user\'s media'));
     })
     .catch((error) => console.log('Unable to delete user account', error));
