@@ -136,3 +136,12 @@ a {
     justify-content: center;
     align-content: center;
   }
+
+  .home {
+    height: 50%;
+    margin-top: 30%
+  }
+
+  .jumbotron {
+    background-color: rgba(243, 237, 237, 0.788);
+  }
