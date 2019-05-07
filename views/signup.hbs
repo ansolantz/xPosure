@@ -1,5 +1,18 @@
-<form action="/signup" method="post">
-  <input type="text" name="username" placeholder="Username">
-  <input type="password" name="password" placeholder="******">
-  <input type="submit" name="Submit" value="Submit">
-</form>
+<div class="container">
+  <form action="/signup" method="post">
+    <div class="form-group">
+      <label for="displayName">Display name</label>
+      <input type="text" class="form-control" id="displayName" name="displayName" aria-describedby="displayNameHelp">
+      <small id="displayNameHelp" class="form-text text-muted">Your display name is how you'll be identified by others on xPosure.</small>
+    </div>
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" class="form-control" id="username" name="username">
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" id="password" name="password">
+      <button type="submit" class="btn btn-primary btn-block">Sign up</button>
+    </div>
+  </form>
+</div>
