@@ -12,7 +12,7 @@ const ensureAuthenticated = (req, res, next) => {
 
 router.get('/:mediaId', ensureAuthenticated, (req, res) => {
   const { mediaId } = req.params;
-  console.log('PHOTO VIEW!!!');
+
   Media.findById(mediaId)
     .then((photo) => {
       console.log(photo);
@@ -35,6 +35,29 @@ router.get('/', ensureAuthenticated, (req, res) => {
       // console.log('All media:', allTheMediaFromDB);
 
       res.render('exploreview', { allTheMediaFromDB, user: req.user });
+    })
+    .catch((err) => console.log(err));
+});
+
+router.patch('/toggleLike/:mediaId', ensureAuthenticated, (req, res) => {
+  console.log('toggle Like page');
+  const { mediaId } = req.params;
+  const { username } = req.user;
+  User.findOne({ username })
+    .then((dbUser) => {
+      console.log('USER NAME', username);
+      console.log('USER ID', dbUser.id);
+      console.log('MEDIA ID ', mediaId);
+      dbUser.likes.push(mediaId);
+      dbUser.save();
+
+      Media.findOneAndUpdate({ _id: mediaId }, { $set: { likes: [dbUser.id] } })
+        // .then((media) => res.redirect('/books'))
+        .then((media) => {
+          console.log('Media uppdated');
+          res.sendStatus(200);
+        })
+        .catch((err) => console.log(err));
     })
     .catch((err) => console.log(err));
 });
