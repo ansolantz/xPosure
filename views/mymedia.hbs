@@ -21,7 +21,7 @@
 
 
 {{!-- <h1>{{ dbUser.username }}</h1> --}}
-{{!-- <p>ID: {{ dbUser.id }}</p> --}}
+{{!-- <p>ID: {{ dbUser._id }}</p>  --}}
 <div class="user-info">
   <div class="text-area">
     <h1>{{ dbUser.displayName }}</h1>
@@ -32,9 +32,10 @@
     <div><img src="{{dbUser.image}}" class="rounded-circle profile-pic" alt="{{dbUser.image}}"></div>
   </div>
 </div>
-<form action="/profileedit/{{ dbUser.id }}">
-<button type="submit" class="btn btn-outline-secondary btn-sm btn-block">Edit profile</button>
-</form>
+{{!-- 
+<button type="submit" class="btn btn-outline-secondary btn-sm btn-block">Edit profile</button> --}}
+ <a href="#" role="button"class="btn btn-outline-secondary btn-sm btn-block">Edit profile</a>
+
 
 
 <div class="user-media-view">

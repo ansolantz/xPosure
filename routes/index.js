@@ -139,8 +139,8 @@ router.get('/:username', ensureAuthenticated, (req, res) => {
 
       Media.find({ creatorId: dbUser.id })
         .then((mediaByUser) => {
-          console.log('USER ID', dbUser.id);
-          console.log('MEDIA BY USER ', mediaByUser);
+          // console.log('USER ID', dbUser.id);
+          // console.log('MEDIA BY USER ', mediaByUser);
           res.render('mymedia', { mediaByUser, dbUser, user: req.user });
         })
         .catch((err) => console.log(err));

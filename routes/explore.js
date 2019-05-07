@@ -14,15 +14,23 @@ router.get('/:mediaId', ensureAuthenticated, (req, res) => {
   const { mediaId } = req.params;
 
   Media.findById(mediaId)
-    .then((photo) => {
-      console.log(photo);
+    .then((dbMedia) => {
+      // console.log(dbMedia);
 
       let isLiked = false;
+      let isEditable = false;
+
       const { username } = req.user;
       User.findOne({ username })
-        .then((user) => {
-          isLiked = user.likes.includes(mediaId);
-          res.render('photoview', { photo, user: req.user, isLiked });
+        .then((dbUser) => {
+          isLiked = dbUser.likes.includes(mediaId);
+          console.log('USER ID: ', dbUser._id);
+          console.log('CREATOR ID', dbMedia.creatorId);
+          if (dbUser._id.toString() === dbMedia.creatorId.toString()) {
+            isEditable = true;
+          }
+
+          res.render('photoview', { dbMedia, dbUser, user: req.user, isLiked, isEditable });
         })
         .catch((err) => console.log(err));
     })
@@ -32,32 +40,45 @@ router.get('/:mediaId', ensureAuthenticated, (req, res) => {
 router.get('/', ensureAuthenticated, (req, res) => {
   Media.find({})
     .then((allTheMediaFromDB) => {
-      // console.log('All media:', allTheMediaFromDB);
-
       res.render('exploreview', { allTheMediaFromDB, user: req.user });
     })
     .catch((err) => console.log(err));
 });
 
 router.patch('/toggleLike/:mediaId', ensureAuthenticated, (req, res) => {
-  console.log('toggle Like page');
+  console.log('Toggle Like page');
   const { mediaId } = req.params;
   const { username } = req.user;
   User.findOne({ username })
     .then((dbUser) => {
-      console.log('USER NAME', username);
-      console.log('USER ID', dbUser.id);
-      console.log('MEDIA ID ', mediaId);
-      dbUser.likes.push(mediaId);
-      dbUser.save();
+      // console.log('USER NAME', username);
+      // console.log('USER ID', dbUser.id);
+      // console.log('MEDIA ID ', mediaId);
 
-      Media.findOneAndUpdate({ _id: mediaId }, { $set: { likes: [dbUser.id] } })
-        // .then((media) => res.redirect('/books'))
-        .then((media) => {
-          console.log('Media uppdated');
-          res.sendStatus(200);
-        })
-        .catch((err) => console.log(err));
+      if (dbUser.likes.includes(mediaId)) {
+        console.log('DELETE MEDIAID');
+        let deletePos = dbUser.likes.indexOf(mediaId);
+        dbUser.likes.splice(deletePos, 1);
+
+        Media.updateOne({ _id: mediaId }, { $pull: { likes: { $in: [ dbUser.id ] } } }, { multi: true })
+
+          .then((media) => {
+            console.log('MediaId Deleted from media');
+            res.sendStatus(200);
+          })
+          .catch((err) => console.log(err));
+      } else {
+        dbUser.likes.push(mediaId);
+
+        Media.findOneAndUpdate({ _id: mediaId }, { $set: { likes: [dbUser.id] } })
+
+          .then((media) => {
+            console.log('Media uppdated');
+            res.sendStatus(200);
+          })
+          .catch((err) => console.log(err));
+      }
+      dbUser.save();
     })
     .catch((err) => console.log(err));
 });

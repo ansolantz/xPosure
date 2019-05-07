@@ -1,26 +1,31 @@
-  <h2>Photo view</h2>
+  {{!-- <h2>Photo view</h2> --}}
 
+ 
 <div class="card" style="width: 100%;">
-  <img class="card-img-top" src="{{this.photo.standard_resolution}}" alt="Card image cap">
+  <img class="card-img-top" src="{{this.dbMedia.standard_resolution}}" alt="Card image cap">
   <div class="card-body">
-    <h5 class="card-title">{{this.photo.meta.description}}</h5>
-    <p class="card-text">{{this.photo.meta.description}}</p>
+   
+    <h5 class="card-title">{{this.dbMedia.meta.description}}</h5>
+    {{!-- <p class="card-text">{{this.dbMedia.meta.description}}</p> --}}
  
     {{#if isLiked}}
-        <a href="#" class="like_btn"><i class="fas fa-heart" id="heart-icon"  data-imageid="{{this.photo._id}}"></i></a>
+        <a href="#" class="like_btn"><i class="fas fa-heart" id="heart-icon"  data-imageid="{{this.dbMedia._id}}"></i></a>
    
     {{else}}
-        <a href="#" class="like_btn"><i class="far fa-heart" id="heart-icon" data-imageid="{{this.photo._id}}"></i></a>
+        <a href="#" class="like_btn"><i class="far fa-heart" id="heart-icon" data-imageid="{{this.dbMedia._id}}"></i></a>
     {{/if}}
 
+    <div>
 
- {{#if userId}}
-<button type="button" class="btn btn-outline-secondary">Edit</button>
-  {{/if}}
-    {{!-- <a href="#" class="card-link">Card link</a>
-    <a href="#" class="card-link">Another link</a>
-    <a href="#" class="btn btn-primary">Go somewhere</a> --}}
+        {{#if isEditable}}
+        <a href="/manage/{{this.dbMedia._id}}" role="button" class="btn btn-outline-secondary btn-sm btn-block">Edit</a>
+
+    {{/if}}
+
+     
   </div>
+  </div>
+  
 </div>
 <script src='/js/photoview.js'></script>
 
