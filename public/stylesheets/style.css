@@ -128,6 +128,7 @@ a {
   .home-image {
     padding: 0;
     margin: 0;
+    margin-right: 0;
     height: 100vh;
     background-image: url("http://www.speakeasybcn.com/blog/wp-content/uploads/2018/03/@elenasarinena-born.jpg");
     background-size: cover;
@@ -140,4 +141,13 @@ a {
   .d-flex {
     justify-content: center;
     align-content: center;
+  }
+
+  .home {
+    height: 50%;
+    margin-top: 30%
+  }
+
+  .jumbotron {
+    background-color: rgba(243, 237, 237, 0.788);
   }
