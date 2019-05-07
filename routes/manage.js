@@ -40,16 +40,19 @@ router.post('/delete/user', ensureAuthenticated, (req, res, next) => {
   const { _id } = req.body;
   User.deleteOne({ _id })
     .then(() => {
-      const media = Media.find({ creatorId: _id }, 'cloudId');
-      Media.deleteMany({ creatorId: _id })
-        .then(() => {
-          console.log(media);
-          cloudinary.v2.api.delete_resources(media, (error, result) => console.log(result, error));
+      Media.find({ creatorId: _id }, { '_id': 0, 'cloudId': '1' })
+        .then((media) => {
+          let cloudIdArray = [];
+          for (let i = 0; i < media.length; i++) {
+            cloudinary.v2.uploader.destroy([media[i].cloudId], (error, result) => { console.log(result, error); });
+          };
+          console.log(cloudIdArray);
+          cloudinary.v2.api.delete_resources(cloudIdArray, (error, result) => console.log(result, error));
         })
         .then(() => res.redirect('/logout'))
-        .catch(() => console.log('Unable to delete user\'s media'));
+        .catch((error) => console.log('Unable to find user\'s media', error));
     })
-    .catch((error) => console.log('Unable to delete user account', error));
+    .catch((error) => console.log('Unable to delete user', error));
 });
 
 /* POST /manage/delete/media */

@@ -34,7 +34,6 @@ router.get('/instagram/callback',
       .then((user) => {
         // > if `username` already exists in the DB, redirect the user to their profile page
         if (user !== null) {
-          console.log('User is not null');
           res.redirect(`/${user.username}`);
           return;
         }
