@@ -12,28 +12,17 @@ const User = require('./../models/users');
 const Media = require('./../models/media');
 
 // This route shouldn't be called directly
-router.get('/auth', (req, res, next) => {
+router.get('/', (req, res, next) => {
   res.redirect('/');
 });
 
 // GET /auth/instagram
-//   Use passport.authenticate() as route middleware to authenticate the
-//   request.  The first step in Instagram authentication will involve
-//   redirecting the user to instagram.com.  After authorization, Instagram
-//   will redirect the user back to this application at /auth/instagram/callback
 router.get('/instagram',
   passport.authenticate('instagram'),
-  (req, res) => {
-    // The request will be redirected to Instagram for authentication, so this
-    // function will not be called.
-  }
+  (req, res) => {}
 );
 
 // GET /auth/instagram/callback
-//   Use passport.authenticate() as route middleware to authenticate the
-//   request.  If authentication fails, the user will be redirected back to the
-//   login page.  Otherwise, the primary route function function will be called,
-//   which, in this example, will redirect the user to the home page.
 router.get('/instagram/callback',
   passport.authenticate('instagram', { failureRedirect: '/' }),
   (req, res, next) => {
@@ -45,14 +34,14 @@ router.get('/instagram/callback',
       .then((user) => {
         // > if `username` already exists in the DB, redirect the user to their profile page
         if (user !== null) {
-          res.redirect(`/${username}`);
+          console.log('User is not null');
+          res.redirect(`/${user.username}`);
           return;
         }
 
         axios.get(media)
           .then((response) => {
             const data = response.data.data;
-            // console.log('data', data);
             let user = req.user;
             user.images = data.map(img => img.images);
             user.images.forEach(image => {
