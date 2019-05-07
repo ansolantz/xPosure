@@ -1,1 +1,22 @@
-<h2>here you can edit your media</h2>
+<h2>Edit media</h2>
+
+<div class="card" style="width: 100%;">
+  <img class="card-img-top" src="{{this.dbMedia.standard_resolution}}" alt="Card image cap">
+
+  
+
+  <div class="card-body">
+   <form action="/manage/edit?_id={{this.dbMedia._id}}" method="POST">
+
+  
+    <input type="text" class="update-form" name="description" value="{{this.dbMedia.meta.description}}">
+
+    <button type="submit" class="btn btn-outline-secondary btn-sm btn-block">Edit photo</button>
+  </form>
+
+   <a href="#" role="button"class="btn btn-outline-danger btn-sm btn-block">Delete this photo</a>
+  </div>
+  
+</div>
+<script src='/js/photoview.js'></script>
+
