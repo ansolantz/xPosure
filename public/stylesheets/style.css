@@ -123,6 +123,7 @@ a {
   .home-image {
     padding: 0;
     margin: 0;
+    margin-right: 0;
     height: 100vh;
     background-image: url("http://www.speakeasybcn.com/blog/wp-content/uploads/2018/03/@elenasarinena-born.jpg");
     background-size: cover;
