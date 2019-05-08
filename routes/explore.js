@@ -50,13 +50,11 @@ router.patch('/toggleLike/:mediaId', ensureAuthenticated, (req, res) => {
   User.findOne({ username })
     .then((dbUser) => {
       if (dbUser.likes.includes(mediaId)) {
-        console.log('DELETE MEDIAID');
         let deletePos = dbUser.likes.indexOf(mediaId);
         dbUser.likes.splice(deletePos, 1);
 
         Media.updateOne({ _id: mediaId }, { $pull: { likes: { $in: [ dbUser.id ] } } }, { multi: true })
           .then((media) => {
-            console.log('MediaId Deleted from media');
             res.sendStatus(200);
           })
           .catch((err) => console.log(err));
@@ -65,7 +63,6 @@ router.patch('/toggleLike/:mediaId', ensureAuthenticated, (req, res) => {
 
         Media.findOneAndUpdate({ _id: mediaId }, { $set: { likes: [dbUser.id] } })
           .then((media) => {
-            console.log('Media uppdated');
             res.sendStatus(200);
           })
           .catch((err) => console.log(err));

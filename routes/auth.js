@@ -27,7 +27,6 @@ router.get('/instagram/callback',
   passport.authenticate('instagram', { failureRedirect: '/' }),
   (req, res, next) => {
     const { username, displayName, homePage, image, bio, media } = req.user;
-    // console.log(req.user);
 
     // Query the users collection and to check username and password
     User.findOne({ username })
@@ -48,14 +47,12 @@ router.get('/instagram/callback',
                 if (error) {
                   console.log('Issue uploading files to Cloudinary', error);
                 } else {
-                  console.log(result);
                   let standardResolutionImageUrl = result.secure_url;
                   let standardResolutionCloudId = result.public_id;
                   cloudinary.uploader.upload(image.standard_resolution.url, { folder: 'xposure', width: 300, height: 300, crop: 'thumb' }, (error, result) => {
                     if (error) {
                       console.log('Issue uploading files to Cloudinary', error);
                     } else {
-                      console.log(result);
                       let thumbnailImageUrl = result.secure_url;
                       let thumbnailCloudId = result.public_id;
                       User.findOne({ username: username })
