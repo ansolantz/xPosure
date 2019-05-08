@@ -1,5 +1,5 @@
 'use strict';
-
+require('dotenv').config;
 const passport = require('passport');
 const InstagramStrategy = require('passport-instagram').Strategy;
 

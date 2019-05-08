@@ -25,7 +25,7 @@
       {{/unless}}
        
       {{#if user}}
-      <a class="nav-link active" href="/"><img src="/images/logo-icon.png" class="icon-logo"></a>
+      <a class="nav-link active" href="/{{user.username}}"><img src="/images/logo-icon.png" class="icon-logo"></a>
        {{/if}}
     
 </nav>
@@ -34,7 +34,7 @@
 <nav class="nav-lg navbar fixed-top navbar-light bg-light">
    <a class="nav-link active" href="/"><img src="/images/logo-icon.png" class="icon-logo"></a>
  
-       {{!-- <a class="nav-item nav-link" href="/">Home</a> --}}
+  
       {{#unless user}}
        <a class="nav-item nav-link"  href="/signup">Signup</a>
        <a class="nav-item nav-link"  href="/">Login</a>
@@ -44,39 +44,22 @@
 
       <a class="nav-item nav-link" href="/{{user.username}}">My Profile<a/>
       <a class="nav-item nav-link" href="/explore">Explore</a>
-      <a class="nav-link active" href="/explore/favorites">Favourites</a>
+      <a class="nav-item nav-link" href="/upload">Upload</a>
+      <a class="nav-link active" href="/{{user.username}}/favorites">Favourites</a>
       <a class="nav-item nav-link" href="/logout">Logout</a>
       {{/if}}
 
 
 </nav>
 
-
-
   {{{body}}}
 
 {{#if user}}
-{{!-- <nav class="navbar fixed-bottom navbar-light bg-light">
-  <div class="container">
-      <a class="nav-link active" href="/{{user.username}}"><i class="fas fa-home"></i></a>
-      <a class="nav-link active" href="/upload"><i class="fas fa-file-upload"></i></a>
-      <a class="nav-link active" href="/explore"><i class="far fa-images"></i></a>
-      <!-- <a class="nav-link active" href="/mapexplore"><i class="fas fa-map-marked-alt"></i></span></a> -->
-    </div>
-  </nav> --}}
-
-{{!-- 
-  <nav class="navbar fixed-bottom navbar-light bg-light">
-       <a class="nav-link active" href="/{{user.username}}"><i class="fas fa-home"></i></a>
-      <a class="nav-link active" href="/upload"><i class="fas fa-file-upload"></i></a>
-      <a class="nav-link active" href="/explore"><i class="far fa-images"></i></a>
-  </nav> --}}
-
 
 <div class="menu-space"></div>
 <nav class="nav-sm navbar fixed-bottom navbar-light bg-light navbar-mobile">
       <a class="nav-link active" href="/{{user.username}}"><i class="fas fa-user-circle"></i></a>
-      <a class="nav-link active" href="/explore/favorites"><i class="far fa-heart"></i></a>
+      <a class="nav-link active" href="/{{user.username}}/favorites"><i class="far fa-heart"></i></a>
       <a class="nav-link active" href="/upload"><i class="fas fa-cloud-upload-alt"></i></a>
       <a class="nav-link active" href="/explore"><i class="far fa-images"></i></a>
 
