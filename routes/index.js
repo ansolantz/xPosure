@@ -25,7 +25,7 @@ const ensureAuthenticated = (req, res, next) => {
 
 /* GET / */
 router.get('/', (req, res, next) => {
-  res.render('home', { user: req.user, title: 'xPosure' });
+  res.render('home', { user: req.user, title: 'xPosure', page: 'home' });
 });
 
 /* POST /login */
