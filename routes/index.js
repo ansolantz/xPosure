@@ -51,10 +51,13 @@ router.get('/signup', (req, res, next) => {
 
 // POST  '/signup'
 router.post('/signup', (req, res, next) => {
-  const { username, password } = req.body;
+  const { displayName, username, password } = req.body;
 
-  if (username === '' && password === '') {
-    res.render('signup', { message: 'Enter a username and password' });
+  if (displayName === '' && username === '' && password === '') {
+    res.render('signup', { message: 'Enter a display name, username and password' });
+    return;
+  } else if (displayName === '') {
+    res.render('signup', { message: 'Enter a display name' });
     return;
   } else if (username === '') {
     res.render('signup', { message: 'Enter a username' });
@@ -74,7 +77,7 @@ router.post('/signup', (req, res, next) => {
       const salt = bcrypt.genSaltSync(bcryptSalt);
       const hashPass = bcrypt.hashSync(password, salt);
 
-      User.create({ username, passwordHash: hashPass })
+      User.create({ displayName, username, passwordHash: hashPass })
         .then(() => res.redirect(`/`))
         .catch((err) => res.render('signup', err, { message: 'Oops, something went wrong. Please try again.' }));
     })
