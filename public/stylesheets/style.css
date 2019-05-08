@@ -29,10 +29,10 @@ nav{
   font-weight: 600;
 }
 a {
-  color: #e8cb2d;
+  color: #aa2cca;
 }
 a:hover{
-  color:#b4921b;
+  color:#5b186c;
 }
 
 .logo-container{
@@ -142,6 +142,10 @@ a:hover{
     display: flex;
     justify-content: flex-start;
   }
+
+  .text-center {
+    text-align:left!important;
+  }
 }
 
 .update-form {
@@ -160,9 +164,14 @@ a:hover{
 
 .btn-primary {
   color: #fff;
-  background-color: #6c6c6c;
-  border-color: #4d4d4d;
+  background-color: #aa2cca;
+  border-color: #5b186c;
 }
+
+.btn-primary a:hover{
+  color:#5b186c;
+}
+
 
 /* Navbar */
 
