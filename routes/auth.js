@@ -27,7 +27,7 @@ router.get('/instagram/callback',
   passport.authenticate('instagram', { failureRedirect: '/' }),
   (req, res, next) => {
     const { username, displayName, homePage, image, bio, media } = req.user;
-    console.log(req.user);
+    // console.log(req.user);
 
     // Query the users collection and to check username and password
     User.findOne({ username })

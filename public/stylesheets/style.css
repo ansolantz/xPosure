@@ -12,19 +12,40 @@ html {
 body {
   margin: 0;
   padding: 0;
-  padding: 50px;
+  /* padding: 50px; */
   font-family: 'Montserrat', sans-serif;
   font-size: 14px;
   padding-top: 70px;
 }
 
 h1{
+  font-family: 'Montserrat', sans-serif;
   font-size: 21px;
   font-weight: 600;
   color: #414141;
 }
+nav{
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+}
 a {
-  color: #00B7FF;
+  color: #e8cb2d;
+}
+a:hover{
+  color:#b4921b;
+}
+
+.logo-container{
+  display: flex;
+  justify-content: center;
+}
+.logo{
+  width:300px;
+  height:300px;
+}
+.icon-logo{
+  width: 50px;
+  height:50px;
 }
 .explore-view{
   display: flex;
@@ -81,6 +102,16 @@ a {
     flex: 0 0 33.3%;
     max-width: 33.3%;
    }
+   .nav-lg {
+     display:none;
+   }
+
+   .navbar{
+     padding:0;
+   }
+  .menu-space{
+    height:50px;
+  }
 }
 
 @media (min-width: 768px) {
@@ -92,6 +123,25 @@ a {
     flex: 0 0 25%;
     max-width: 25%;
    }
+   .nav-sm{
+     display:none;
+   }
+   .form-control {
+    /* width: 70%;
+    margin: 0 auto; */
+   }
+   .btn-block {
+    width: auto;
+   }
+
+   .frm-lg {
+    width: 50%;
+    /* margin: 0 auto; */
+  }
+  .logo-container{
+    display: flex;
+    justify-content: flex-start;
+  }
 }
 
 .update-form {
@@ -100,6 +150,7 @@ a {
   /* border: 1px solid #eaeaea; */
   text-align: center;
 }
+
 .explore-image{
   /*width: 50%;*/
   max-width: 100%; 
@@ -107,15 +158,68 @@ a {
   border: 1px solid #eaeaea;
 }
 
+.btn-primary {
+  color: #fff;
+  background-color: #6c6c6c;
+  border-color: #4d4d4d;
+}
+
+/* Navbar */
 
 
-  .navbar {
+.nav-lg {
+  justify-content: flex-start;
+}
+
+.nav-sm{
+  justify-content: space-evenly;
+}
+
+.nav-sm{
+  font-size: 26px;
+  font-weight: 100;
+}
+.nav-link {
+  display: inline;
+  padding: .5rem 1rem;
+}
+
+/* .navbar {
+  width: 100%;
+  background-color: #555;
+  overflow: auto;
+}
+
+.navbar a {
+  float: left;
+  padding: 12px;
+  color: white;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.navbar a:hover {
+  background-color: #000;
+}
+
+.active {
+  background-color: #4CAF50;
+} 
+
+@media screen and (max-width: 500px) {
+  .navbar a {
+    float: none;
+    display: block;
+  }
+}
+*/
+/* .navbar {
     font-size: 4vh;
-  }
+ }
 
-  .sticky-top {
+.sticky-top {
     font-size: 2vh;
-  }
+}
 
   body {
     padding: 0;
@@ -150,4 +254,4 @@ a {
 
   .jumbotron {
     background-color: rgba(243, 237, 237, 0.788);
-  }
+  } */

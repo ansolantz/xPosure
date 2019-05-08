@@ -10,6 +10,12 @@ const ensureAuthenticated = (req, res, next) => {
   res.redirect('/');
 };
 
+/* GET /explore/favorites */
+router.get('/favorites', ensureAuthenticated, (req, res) => {
+  console.log('FAVORITES');
+  res.render('favorites');
+});
+
 /* GET /explore/:mediaId */
 router.get('/:mediaId', ensureAuthenticated, (req, res) => {
   const { mediaId } = req.params;
