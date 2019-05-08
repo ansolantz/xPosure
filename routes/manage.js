@@ -46,7 +46,6 @@ router.post('/delete/user', ensureAuthenticated, (req, res, next) => {
           for (let i = 0; i < media.length; i++) {
             cloudinary.v2.uploader.destroy([media[i].cloudId], (error, result) => { console.log(result, error); });
           };
-          console.log(cloudIdArray);
           cloudinary.v2.api.delete_resources(cloudIdArray, (error, result) => console.log(result, error));
         })
         .then(() => res.redirect('/logout'))
