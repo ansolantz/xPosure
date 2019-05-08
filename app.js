@@ -1,5 +1,6 @@
 'use strict';
 
+const require('dotenv').config;
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -19,7 +20,8 @@ const manageRouter = require('./routes/manage');
 
 mongoose
   // .connect(`mongodb://localhost/${dbName}`, { useNewUrlParser: true })
-  .connect(`${dbUrl}`, { useNewUrlParser: true, useFindAndModify: false })
+  //.connect(`${dbUrl}`, { useNewUrlParser: true, useFindAndModify: false })
+  .connect(process.env.MONGODB_URI, { useNewUrlParser: true, useFindAndModify: false })
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${dbName}"`);
   })
