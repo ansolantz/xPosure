@@ -1,3 +1,13 @@
+
+<h1>Favorites</h1>
+
+<div class="explore-view">
+{{#each mediaFavorites}}
+<div class="explore-miniature"><a href="/explore/{{this._id}}"><img class="img-fluid explore-image" src="{{this.standard_resolution}}"></a></div>
+
+{{/each}}
+
+
 <div class="user-media-view">
   {{#each mediaByUser}}
   <div class="user-media-miniature">
@@ -6,4 +16,5 @@
     </a>
   </div>
   {{/each}}
+
 </div>
