@@ -11,7 +11,6 @@ const MongoStore = require('connect-mongo')(session);
 const passport = require('./config/passport-config');
 const InstagramStrategy = require('./config/passport-instagram-strategy');
 const LocalStrategy = require('./config/passport-local-strategy');
-const { dbName, dbUrl } = require('./config/db');
 
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
@@ -21,7 +20,7 @@ const manageRouter = require('./routes/manage');
 mongoose
   .connect(process.env.MONGODB_URI, { useNewUrlParser: true, useFindAndModify: false })
   .then(x => {
-    console.log(`Connected to Mongo! Database name: "${dbName}"`);
+    console.log(`Connected to Mongo!`);
   })
   .catch(err => {
     console.error('Error connecting to mongo', err);

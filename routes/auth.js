@@ -19,7 +19,7 @@ router.get('/', (req, res, next) => {
 // GET /auth/instagram
 router.get('/instagram',
   passport.authenticate('instagram'),
-  (req, res) => {}
+  (req, res) => { }
 );
 
 // GET /auth/instagram/callback
@@ -48,14 +48,25 @@ router.get('/instagram/callback',
                 if (error) {
                   console.log('Issue uploading files to Cloudinary', error);
                 } else {
-                  const { secure_url, public_id } = result;
-                  User.findOne({ username: username })
-                    .then((user) => {
-                      Media.create({ standard_resolution: secure_url, cloudId: public_id, creatorId: user._id })
-                        .then(() => console.log('Media inserted into the DB successfully'))
-                        .catch((error) => console.log('Error inserting media into the DB', error));
-                    })
-                    .catch((error) => console.log('Error finding user', error));
+                  console.log(result);
+                  let standardResolutionImageUrl = result.secure_url;
+                  let standardResolutionCloudId = result.public_id;
+                  cloudinary.uploader.upload(image.standard_resolution.url, { folder: 'xposure', width: 300, height: 300, crop: 'thumb' }, (error, result) => {
+                    if (error) {
+                      console.log('Issue uploading files to Cloudinary', error);
+                    } else {
+                      console.log(result);
+                      let thumbnailImageUrl = result.secure_url;
+                      let thumbnailCloudId = result.public_id;
+                      User.findOne({ username: username })
+                        .then((user) => {
+                          Media.create({ standard_resolution: standardResolutionImageUrl, cloudId: standardResolutionCloudId, thumbnail: thumbnailImageUrl, thumbnail_cloudId: thumbnailCloudId, creatorId: user._id })
+                            .then(() => console.log('Media inserted into the DB successfully'))
+                            .catch((error) => console.log('Error inserting media into the DB', error));
+                        })
+                        .catch((error) => console.log('Error finding user', error));
+                    }
+                  });
                 }
               });
             });
@@ -67,7 +78,7 @@ router.get('/instagram/callback',
           .then(() => res.redirect(`/${username}`))
           .catch((err) => console.log('Issue saving user to database:', err));
 
-      // catch errors from User.findOne
+        // catch errors from User.findOne
       }).catch((err) => next(err));
   }
 );
