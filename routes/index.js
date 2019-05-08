@@ -124,14 +124,14 @@ router.get('/:username', (req, res) => {
     .catch((err) => console.log(err));
 });
 
-/* GET /:username */
+/* GET /:username/favorites */
 router.get('/:username/favorites', (req, res) => {
-  const { username } = req.params;
+  const { username } = req.user;
   User.findOne({ username })
     .then((dbUser) => {
-      Media.find({ _id: dbUser.likes })
-        .then((mediaByUser) => {
-          res.render('favorites', { mediaByUser, dbUser, user: req.user });
+      Media.find({ _id: { $in: dbUser.likes } })
+        .then((mediaFavorites) => {
+          res.render('favorites', { mediaFavorites, dbUser, user: req.user });
         })
         .catch((err) => console.log(err));
     })

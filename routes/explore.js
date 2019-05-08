@@ -10,21 +10,6 @@ const ensureAuthenticated = (req, res, next) => {
   res.redirect('/');
 };
 
-/* GET /explore/favorites */
-router.get('/favorites', ensureAuthenticated, (req, res) => {
-  const { username } = req.user;
-  User.findOne({ username })
-    .then((dbUser) => {
-      Media.find({ _id: { $in: dbUser.likes } })
-        .then((mediaFavorites) => {
-          console.log('media fav ', mediaFavorites);
-          res.render('favorites', { mediaFavorites, dbUser, user: req.user });
-        })
-        .catch((err) => console.log(err));
-    })
-    .catch((err) => console.log(err));
-});
-
 /* GET /explore/:mediaId */
 router.get('/:mediaId', ensureAuthenticated, (req, res) => {
   const { mediaId } = req.params;
