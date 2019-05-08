@@ -4,6 +4,8 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const parser = require('./../config/multer');
+const cloudinaryConfig = require('./../config/cloudinary-config');
+const cloudinary = require('cloudinary').v2;
 const bcrypt = require('bcrypt');
 
 const User = require('./../models/users');
@@ -68,6 +70,7 @@ router.post('/signup', (req, res, next) => {
         res.render('signup', { message: 'Sorry, the username already exists' });
         return;
       }
+
       const salt = bcrypt.genSaltSync(bcryptSalt);
       const hashPass = bcrypt.hashSync(password, salt);
 
@@ -92,22 +95,32 @@ router.get('/upload', ensureAuthenticated, (req, res) => {
 });
 
 router.post('/upload', parser.single('image'), (req, res) => {
-  let imageUrl = '';
-  let cloudId = '';
+  let standardResolutionImageUrl = '';
+  let standardResolutionCloudId = '';
+  let thumbnailImageUrl = '';
+  let thumbnailCloudId = '';
   let user = req.user;
 
   if (req.file) {
-    console.log('req.file', req.file);
-    imageUrl = req.file.secure_url;
-    cloudId = req.file.public_id;
+    standardResolutionImageUrl = req.file.secure_url;
+    standardResolutionCloudId = req.file.public_id;
+    cloudinary.uploader.upload(standardResolutionImageUrl,
+      { folder: 'xposure', image_metadata: true, width: 300, height: 300, crop: 'thumb' },
+      (error, result) => {
+        if (error) {
+          console.log('Issue uploading files to Cloudinary', error);
+        } else {
+          thumbnailCloudId = result.public_id;
+          thumbnailImageUrl = result.secure_url;
+          User.findOne({ username: user.username })
+            .then((dbUser) => {
+              Media.create({ standard_resolution: standardResolutionImageUrl, cloudId: standardResolutionCloudId, thumbnail: thumbnailImageUrl, thumbnail_cloudId: thumbnailCloudId, creatorId: dbUser._id })
+                .then(() => res.redirect(`/${dbUser.username}/`));
+            })
+            .catch((error) => console.log('Error finding authenticated user', error));
+        }
+      });
   }
-  console.log('cloudId', cloudId);
-  User.findOne({ username: user.username })
-    .then((dbUser) => {
-      Media.create({ standard_resolution: imageUrl, cloudId, creatorId: dbUser._id })
-        .then(() => res.redirect(`/${dbUser.username}/`));
-    })
-    .catch((error) => console.log('Error finding authenticated user', error));
 });
 
 /* GET /:username */
