@@ -124,4 +124,18 @@ router.get('/:username', (req, res) => {
     .catch((err) => console.log(err));
 });
 
+/* GET /:username */
+router.get('/:username/favorites', (req, res) => {
+  const { username } = req.params;
+  User.findOne({ username })
+    .then((dbUser) => {
+      Media.find({ _id: dbUser.likes })
+        .then((mediaByUser) => {
+          res.render('favorites', { mediaByUser, dbUser, user: req.user });
+        })
+        .catch((err) => console.log(err));
+    })
+    .catch((err) => console.log(err));
+});
+
 module.exports = router;

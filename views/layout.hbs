@@ -44,7 +44,7 @@
 
       <a class="nav-item nav-link" href="/{{user.username}}">My Profile<a/>
       <a class="nav-item nav-link" href="/explore">Explore</a>
-      <a class="nav-link active" href="/explore/favorites">Favourites</a>
+      <a class="nav-link active" href="/{{user.username}}/favorites">Favourites</a>
       <a class="nav-item nav-link" href="/logout">Logout</a>
       {{/if}}
 
@@ -76,7 +76,7 @@
 <div class="menu-space"></div>
 <nav class="nav-sm navbar fixed-bottom navbar-light bg-light navbar-mobile">
       <a class="nav-link active" href="/{{user.username}}"><i class="fas fa-user-circle"></i></a>
-      <a class="nav-link active" href="/explore/favorites"><i class="far fa-heart"></i></a>
+      <a class="nav-link active" href="/{{user.username}}/favorites"><i class="far fa-heart"></i></a>
       <a class="nav-link active" href="/upload"><i class="fas fa-cloud-upload-alt"></i></a>
       <a class="nav-link active" href="/explore"><i class="far fa-images"></i></a>
 
