@@ -20,21 +20,26 @@ body {
 
 h1{
   font-family: 'Montserrat', sans-serif;
-  font-size: 21px;
+  font-size: 20px;
   font-weight: 600;
   color: #414141;
+  padding:10px 0 10px 0;
 }
 nav{
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
 }
 a {
-  color: #aa2cca;
+  color: #9225ad;
 }
+
 a:hover{
   color:#5b186c;
 }
 
+.container{
+  margin-top: 10px;
+}
 .logo-container{
   display: flex;
   justify-content: center;
@@ -73,7 +78,7 @@ a:hover{
 .user-info{
   display: flex;
   flex-direction: row;
-  padding:10px;
+  padding:15px;
   border: 1px solid #eaeaea;
 }
 
@@ -92,7 +97,7 @@ a:hover{
   margin: 5px 0 5px 0;
   border: 1px solid #eaeaea;
 }
-
+/* Small screen */
 @media (max-width: 767px) {
   .explore-miniature{
     flex: 0 0 33.3%;
@@ -105,15 +110,15 @@ a:hover{
    .nav-lg {
      display:none;
    }
-
    .navbar{
-     padding:0;
+    padding: .2rem 1rem;
    }
   .menu-space{
     height:50px;
   }
 }
 
+/* Desktop */
 @media (min-width: 768px) {
   .explore-miniature{
     flex: 0 0 25%;
@@ -126,9 +131,8 @@ a:hover{
    .nav-sm{
      display:none;
    }
-   .form-control {
-    /* width: 70%;
-    margin: 0 auto; */
+   .navbar{
+    padding: .2rem 1rem;
    }
    .btn-block {
     width: auto;
@@ -185,7 +189,7 @@ a:hover{
 }
 
 .nav-sm{
-  font-size: 26px;
+  font-size: 22px;
   font-weight: 100;
 }
 .nav-link {
@@ -193,12 +197,11 @@ a:hover{
   padding: .5rem 1rem;
 }
 
-/* .navbar {
-  width: 100%;
-  background-color: #555;
-  overflow: auto;
+.navbar {
+  border-bottom: 1px solid #eaeaea;
+  border-top: 1px solid #eaeaea;
 }
-
+/*
 .navbar a {
   float: left;
   padding: 12px;
