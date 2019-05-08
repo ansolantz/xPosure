@@ -48,10 +48,12 @@ a:hover{
   width:300px;
   height:300px;
 }
+
 .icon-logo{
   width: 50px;
   height:50px;
 }
+
 .explore-view{
   display: flex;
   flex-wrap: wrap;
@@ -74,11 +76,16 @@ nav .wrapper {
 }
 
 .like_btn i  {
-  color: pink;
+  color: rgb(241, 125, 144);
+  font-size: 24px;
+  padding-bottom: 15px;
 }
 
+.edit-btn-container{
+  padding: 5px 0 15px 0;
+}
 .profile-pic{
-  width: 60px;
+  width: 65px;
 }
 .user-info{
   display: flex;
@@ -96,6 +103,7 @@ nav .wrapper {
   padding: 3px;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
 }
 
 .btn{
@@ -186,8 +194,8 @@ main {
   border-color: #5b186c;
 }
 
-.btn-primary a:hover{
-  color:#5b186c;
+.btn-primary:hover{
+  background-color: #5b186c;
 }
 
 
