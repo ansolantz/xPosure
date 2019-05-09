@@ -61,10 +61,16 @@ router.post('/delete/user', ensureAuthenticated, (req, res, next) => {
 router.post('/delete/media', ensureAuthenticated, (req, res, next) => {
   const { _id } = req.body;
   const user = req.user;
-  Media.findById({ _id })
-    .then((media) => cloudinary.v2.uploader.destroy(media.cloudId, (error, result) => { console.log(result, error); }))
-    .then((media) => cloudinary.v2.uploader.destroy(media.thumbnail_cloudId, (error, result) => { console.log(result, error); }))
-    .then(() => Media.deleteOne({ _id }))
+  let deleteFromCloudinary = (media) => {
+    cloudinary.v2.uploader.destroy(media.thumbnail_cloudId, (error, result) => { console.log(result, error); });
+    cloudinary.v2.uploader.destroy(media.cloudId, (error, result) => { console.log(result, error); });
+  };
+
+  Media.findByIdAndDelete(_id)
+    .then((media) => {
+      deleteFromCloudinary(media);
+    })
+    .catch((err) => console.log(err))
     .then(() => res.redirect(`/${user.username}`))
     .catch((error) => console.log('Unable to delete media', error));
 });
