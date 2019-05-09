@@ -145,7 +145,7 @@ router.get('/:username/favorites', (req, res) => {
   const { username } = req.user;
   User.findOne({ username })
     .then((dbUser) => {
-      Media.find({ _id: { $in: dbUser.likes } })
+      Media.find({ _id: { $in: dbUser.likes } }).sort({ timestamps: -1 })
         .then((mediaFavorites) => {
           res.render('favorites', { mediaFavorites, dbUser, user: req.user, title: 'Favorites' });
         })
