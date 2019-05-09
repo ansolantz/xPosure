@@ -99,6 +99,12 @@ nav .wrapper {
   white-space: pre-wrap;
 }
 
+.card .tags {
+  text-transform: lowercase;
+  white-space: normal;
+  word-wrap: none;
+}
+
 .text-area {
   flex: 0 0 70%;
 }

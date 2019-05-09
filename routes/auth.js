@@ -46,12 +46,16 @@ router.get('/instagram/callback',
                 let user = req.user;
                 user.images = data.map(img => img.images);
                 user.images.forEach((image, index) => {
-                  cloudinary.uploader.upload(image.standard_resolution.url, { folder: 'xposure', image_metadata: true }, (error, result) => {
+                  cloudinary.uploader.upload(image.standard_resolution.url, { folder: 'xposure', categorization: 'google_tagging', image_metadata: true }, (error, result) => {
                     if (error) {
                       console.log('Issue uploading files to Cloudinary', error);
                     } else {
                       let standardResolutionImageUrl = result.secure_url;
                       let standardResolutionCloudId = result.public_id;
+                      const tags = [];
+                      result.info.categorization.google_tagging.data.forEach(tag => {
+                        tags.push(tag.tag);
+                      });
                       cloudinary.uploader.upload(image.standard_resolution.url, { folder: 'xposure', width: 300, height: 300, crop: 'thumb' }, (error, result) => {
                         if (error) {
                           console.log('Issue uploading files to Cloudinary', error);
@@ -60,7 +64,7 @@ router.get('/instagram/callback',
                           let thumbnailCloudId = result.public_id;
                           User.findOne({ username: username })
                             .then((dbuser) => {
-                              Media.create({ standard_resolution: standardResolutionImageUrl, cloudId: standardResolutionCloudId, thumbnail: thumbnailImageUrl, thumbnail_cloudId: thumbnailCloudId, creatorId: dbuser._id })
+                              Media.create({ standard_resolution: standardResolutionImageUrl, cloudId: standardResolutionCloudId, thumbnail: thumbnailImageUrl, thumbnail_cloudId: thumbnailCloudId, creatorId: dbuser._id, tags })
                                 .then(() => {})
                                 .catch((error) => console.log('Error inserting media into the DB', error));
                             })

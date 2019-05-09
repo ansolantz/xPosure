@@ -7,6 +7,9 @@
     {{else}}
       <a href="#" class="like_btn"><i class="far fa-heart" id="heart-icon" data-imageid="{{this.dbMedia._id}}"></i></a>
     {{/if}}
+    {{#if this.dbMedia.tags}}
+    <p class="tags">{{#each this.dbMedia.tags}}<a href="#">#{{this}}</a>&nbsp;{{/each}}</p>
+    {{/if}}
     <div class="edit-btn-container">
     {{#if isEditable}}
       <a href="/manage/{{this.dbMedia._id}}" role="button" class="btn btn-outline-secondary btn-sm btn-block">Edit</a>

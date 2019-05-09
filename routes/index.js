@@ -108,16 +108,20 @@ router.post('/upload', parser.single('image'), (req, res) => {
     standardResolutionImageUrl = req.file.secure_url;
     standardResolutionCloudId = req.file.public_id;
     cloudinary.uploader.upload(standardResolutionImageUrl,
-      { folder: 'xposure', image_metadata: true, width: 300, height: 300, crop: 'thumb' },
+      { folder: 'xposure', categorization: 'google_tagging', image_metadata: true, width: 300, height: 300, crop: 'thumb' },
       (error, result) => {
         if (error) {
           console.log('Issue uploading files to Cloudinary', error);
         } else {
+          const tags = [];
+          result.info.categorization.google_tagging.data.forEach(tag => {
+            tags.push(tag.tag);
+          });
           thumbnailCloudId = result.public_id;
           thumbnailImageUrl = result.secure_url;
           User.findOne({ username: user.username })
             .then((dbUser) => {
-              Media.create({ standard_resolution: standardResolutionImageUrl, cloudId: standardResolutionCloudId, thumbnail: thumbnailImageUrl, thumbnail_cloudId: thumbnailCloudId, creatorId: dbUser._id })
+              Media.create({ standard_resolution: standardResolutionImageUrl, cloudId: standardResolutionCloudId, thumbnail: thumbnailImageUrl, thumbnail_cloudId: thumbnailCloudId, creatorId: dbUser._id, tags })
                 .then(() => res.redirect(`/${dbUser.username}/`));
             })
             .catch((error) => console.log('Error finding authenticated user', error));
