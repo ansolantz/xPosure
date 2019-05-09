@@ -40,15 +40,17 @@ router.post('/delete/user', ensureAuthenticated, (req, res, next) => {
   const { _id } = req.body;
   User.deleteOne({ _id })
     .then(() => {
-      Media.find({ creatorId: _id }, { '_id': 0, 'cloudId': '1' })
+      Media.find({ creatorId: _id }, { '_id': 1, 'cloudId': '1', 'thumbnail_cloudId': '1' })
         .then((media) => {
-          let cloudIdArray = [];
+          res.redirect('/logout');
           for (let i = 0; i < media.length; i++) {
             cloudinary.v2.uploader.destroy([media[i].cloudId], (error, result) => { console.log(result, error); });
+            cloudinary.v2.uploader.destroy([media[i].thumbnail_cloudId], (error, result) => { console.log(result, error); });
+            Media.deleteOne({ _id: media[i]._id })
+              .then(() => {})
+              .catch((error) => console.log('Unable to delete media from DB', error));
           };
-          cloudinary.v2.api.delete_resources(cloudIdArray, (error, result) => console.log(result, error));
         })
-        .then(() => res.redirect('/logout'))
         .catch((error) => console.log('Unable to find user\'s media', error));
     })
     .catch((error) => console.log('Unable to delete user', error));
@@ -61,6 +63,7 @@ router.post('/delete/media', ensureAuthenticated, (req, res, next) => {
   const user = req.user;
   Media.findById({ _id })
     .then((media) => cloudinary.v2.uploader.destroy(media.cloudId, (error, result) => { console.log(result, error); }))
+    .then((media) => cloudinary.v2.uploader.destroy(media.thumbnail_cloudId, (error, result) => { console.log(result, error); }))
     .then(() => Media.deleteOne({ _id }))
     .then(() => res.redirect(`/${user.username}`))
     .catch((error) => console.log('Unable to delete media', error));
