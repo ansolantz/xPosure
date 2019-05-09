@@ -27,7 +27,7 @@ router.get('/:mediaId', ensureAuthenticated, (req, res) => {
           if (dbUser._id.toString() === dbMedia.creatorId.toString()) {
             isEditable = true;
           }
-          res.render('photoview', { dbMedia, dbUser, user: req.user, isLiked, isEditable });
+          res.render('photoview', { dbMedia, dbUser, user: req.user, isLiked, isEditable, title: 'Photo' });
         })
         .catch((err) => console.log(err));
     })
@@ -36,9 +36,9 @@ router.get('/:mediaId', ensureAuthenticated, (req, res) => {
 
 /* GET /explore/ */
 router.get('/', ensureAuthenticated, (req, res) => {
-  Media.find({})
+  Media.find({}).sort({ timestamps: -1 })
     .then((allTheMediaFromDB) => {
-      res.render('exploreview', { allTheMediaFromDB, user: req.user });
+      res.render('exploreview', { allTheMediaFromDB, user: req.user, title: 'Explore' });
     })
     .catch((err) => console.log(err));
 });

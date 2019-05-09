@@ -7,7 +7,7 @@
     {{else}}
       <a href="#" class="like_btn"><i class="far fa-heart" id="heart-icon" data-imageid="{{this.dbMedia._id}}"></i></a>
     {{/if}}
-    <div>
+    <div class="edit-btn-container">
     {{#if isEditable}}
       <a href="/manage/{{this.dbMedia._id}}" role="button" class="btn btn-outline-secondary btn-sm btn-block">Edit</a>
     {{/if}}
