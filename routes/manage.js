@@ -19,7 +19,7 @@ router.get('/profile', ensureAuthenticated, (req, res, next) => {
   const { _id } = req.user;
 
   User.findOne({ _id })
-    .then((user) => res.render('profile', { user }))
+    .then((user) => res.render('profile', { user, title: 'Edit profile' }))
     .catch((error) => console.log('Error retrieving user profile from DB', error));
 });
 
@@ -100,7 +100,7 @@ router.get('/:mediaId', ensureAuthenticated, (req, res) => {
       const { username } = req.user;
       User.findOne({ username })
         .then((dbUser) => {
-          res.render('mediaedit', { dbMedia, dbUser, user: req.user });
+          res.render('mediaedit', { dbMedia, dbUser, user: req.user, title: 'Edit photo' });
         })
         .catch((err) => console.log(err));
     })

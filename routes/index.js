@@ -25,7 +25,7 @@ const ensureAuthenticated = (req, res, next) => {
 
 /* GET / */
 router.get('/', (req, res, next) => {
-  res.render('home', { user: req.user, title: 'xPosure', page: 'home' });
+  res.render('home', { user: req.user, page: 'home' });
 });
 
 /* POST /login */
@@ -94,7 +94,7 @@ router.get('/logout', (req, res) => {
 
 router.get('/upload', ensureAuthenticated, (req, res) => {
   let user = req.user;
-  res.render('upload', { user });
+  res.render('upload', { user, title: 'Upload a photo' });
 });
 
 router.post('/upload', parser.single('image'), (req, res) => {
@@ -133,7 +133,7 @@ router.get('/:username', (req, res) => {
     .then((dbUser) => {
       Media.find({ creatorId: dbUser._id })
         .then((mediaByUser) => {
-          res.render('mymedia', { mediaByUser, dbUser, user: req.user });
+          res.render('mymedia', { mediaByUser, dbUser, user: req.user, title: `${dbUser.username}` });
         })
         .catch((err) => console.log(err));
     })
@@ -147,7 +147,7 @@ router.get('/:username/favorites', (req, res) => {
     .then((dbUser) => {
       Media.find({ _id: { $in: dbUser.likes } })
         .then((mediaFavorites) => {
-          res.render('favorites', { mediaFavorites, dbUser, user: req.user });
+          res.render('favorites', { mediaFavorites, dbUser, user: req.user, title: 'Favorites' });
         })
         .catch((err) => console.log(err));
     })
