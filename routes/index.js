@@ -131,7 +131,7 @@ router.get('/:username', (req, res) => {
   const { username } = req.params;
   User.findOne({ username })
     .then((dbUser) => {
-      Media.find({ creatorId: dbUser._id })
+      Media.find({ creatorId: dbUser._id }).sort({ timestamps: -1 })
         .then((mediaByUser) => {
           res.render('mymedia', { mediaByUser, dbUser, user: req.user, title: `${dbUser.username}` });
         })
@@ -145,7 +145,7 @@ router.get('/:username/favorites', (req, res) => {
   const { username } = req.user;
   User.findOne({ username })
     .then((dbUser) => {
-      Media.find({ _id: { $in: dbUser.likes } })
+      Media.find({ _id: { $in: dbUser.likes } }).sort({ timestamps: -1 })
         .then((mediaFavorites) => {
           res.render('favorites', { mediaFavorites, dbUser, user: req.user, title: 'Favorites' });
         })

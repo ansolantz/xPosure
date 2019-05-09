@@ -36,7 +36,7 @@ router.get('/:mediaId', ensureAuthenticated, (req, res) => {
 
 /* GET /explore/ */
 router.get('/', ensureAuthenticated, (req, res) => {
-  Media.find({})
+  Media.find({}).sort({ timestamps: -1 })
     .then((allTheMediaFromDB) => {
       res.render('exploreview', { allTheMediaFromDB, user: req.user, title: 'Explore' });
     })
