@@ -1,16 +1,18 @@
+{{#unless mediaFavorites}}
+<div class="container">
+  <h1>Hey {{dbUser.displayName}}</h1>
+  <p>You don't have any favorites at the moment.</p>
+  <a href="/explore">
+    <button class="btn btn-primary btn-block">Go explore</button>
+  </a>
+</div>
+{{/unless}}
 <div class="user-media-view">
-  {{#unless mediaFavorites}}
-    <h1>Hey {{dbUser.displayName}}</h1>
-    <p>You don't have any favorites at the moment.</p>
-    <a href="/explore">
-      <button class="btn btn-primary btn-block">Go explore</button>
-    </a>
-  {{/unless}}
-  {{#each mediaFavorites}}
+{{#each mediaFavorites}}
   <div class="user-media-miniature">
     <a href="/explore/{{this._id}}">
       <img class="img-fluid explore-image" src="{{this.thumbnail}}">
     </a>
   </div>
-  {{/each}}
+{{/each}}
 </div>

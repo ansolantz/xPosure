@@ -1,7 +1,9 @@
+
 <div class="user-info">
   <div class="text-area">
     <h1>{{ dbUser.displayName }}</h1>
-    <div>{{ dbUser.bio }}</div>
+    <div class="line-breaks">{{ dbUser.bio }}</div>
+
     <a href="{{ dbUser.homePage }}" target="_blank" rel="noopener">{{ dbUser.homePage }}</a>
   </div>
   <div class="picture-area">
@@ -24,4 +26,3 @@
   </div>
   {{/each}}
 </div>
-

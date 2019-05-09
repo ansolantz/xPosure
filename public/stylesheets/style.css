@@ -95,16 +95,19 @@ nav .wrapper {
   border: 1px solid #eaeaea;
 }
 
+.line-breaks {
+  white-space: pre-wrap;
+}
+
 .text-area {
   flex: 0 0 70%;
 }
 
 .picture-area {
   flex: 0 0 30%;
-  padding: 3px;
+  padding: 5px;
   display: flex;
   justify-content: flex-end;
-  align-items: center;
 }
 
 .btn {
