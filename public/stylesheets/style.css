@@ -8,58 +8,60 @@ html {
   box-sizing: inherit;
 }
 
-
 body {
   margin: 0;
   padding: 0;
-  /* padding: 50px; */
   font-family: 'Montserrat', sans-serif;
   font-size: 14px;
   padding-top: 70px;
 }
 
-h1{
+h1 {
   font-family: 'Montserrat', sans-serif;
   font-size: 20px;
   font-weight: 600;
   color: #414141;
-  padding:10px 0 10px 0;
+  padding: 10px 0 10px 0;
 }
-nav{
+
+nav {
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
 }
+
 a {
   color: #9225ad;
 }
 
 a:hover{
-  color:#5b186c;
+  color: #5b186c;
 }
 
-.container{
+.container {
   margin-top: 10px;
 }
-.logo-container{
+
+.logo-container {
   display: flex;
   justify-content: center;
 }
-.logo{
-  width:300px;
-  height:300px;
+
+.logo {
+  width: 300px;
+  height: 300px;
 }
 
 .icon-logo{
   width: 50px;
-  height:50px;
+  height: 50px;
 }
 
-.explore-view{
+.explore-view {
   display: flex;
   flex-wrap: wrap;
 }
 
-.like_btn i  {
+.like_btn i {
   color: pink;
   font-size: 20px;
 }
@@ -69,36 +71,35 @@ nav .wrapper {
   margin: 0 auto;
 }
 
-
-.user-media-view{
+.user-media-view {
   display: flex;
   flex-wrap: wrap;
 }
 
 .like_btn i  {
-  color: rgb(241, 125, 144);
+  color: rgb(241,125,144);
   font-size: 24px;
   padding-bottom: 15px;
 }
 
-.edit-btn-container{
+.edit-btn-container {
   padding: 5px 0 15px 0;
 }
-.profile-pic{
+.profile-pic {
   width: 65px;
 }
-.user-info{
+.user-info {
   display: flex;
   flex-direction: row;
   padding:15px;
   border: 1px solid #eaeaea;
 }
 
-.text-area{
+.text-area {
   flex: 0 0 70%;
 }
 
-.picture-area{
+.picture-area {
   flex: 0 0 30%;
   padding: 3px;
   display: flex;
@@ -106,7 +107,7 @@ nav .wrapper {
   align-items: center;
 }
 
-.btn{
+.btn {
   margin: 5px 0 5px 0;
   border: 1px solid #eaeaea;
 }
@@ -125,50 +126,50 @@ main {
 
 /* Small screen */
 @media (max-width: 767px) {
-  .explore-miniature{
+  .explore-miniature {
     flex: 0 0 33.3%;
     max-width: 33.3%;
    }
-   .user-media-miniature{
+
+   .user-media-miniature {
     flex: 0 0 33.3%;
     max-width: 33.3%;
    }
+
    .nav-lg {
-     display:none;
+     display: none;
    }
+
    .navbar{
     padding: .2rem 1rem;
    }
-  .menu-space{
-    height:50px;
+
+  .menu-space {
+    height: 50px;
   }
 }
 
 /* Desktop */
 @media (min-width: 768px) {
-  .explore-miniature{
+  .explore-miniature {
     flex: 0 0 25%;
     max-width: 25%;
    }
-   .user-media-miniature{
+
+   .user-media-miniature {
     flex: 0 0 25%;
     max-width: 25%;
    }
-   .nav-sm{
-     display:none;
+
+   .nav-sm {
+     display: none;
    }
-   .navbar{
+
+   .navbar {
     padding: .2rem 1rem;
    }
-   /* .btn-block {
-    width: auto;
-   } */
 
-  /*  .frm-lg {
-    width: 50%;
-    margin: 0 auto;
-  }*/
-  .logo-container{
+  .logo-container {
     display: flex;
     justify-content: flex-start;
   }
@@ -177,12 +178,10 @@ main {
 .update-form {
   width: 100%;
   height: 25px;
-  /* border: 1px solid #eaeaea; */
   text-align: center;
 }
 
-.explore-image{
-  /*width: 50%;*/
+.explore-image {
   max-width: 100%; 
   height: auto;
   border: 1px solid #eaeaea;
@@ -194,25 +193,19 @@ main {
   border-color: #5b186c;
 }
 
-.btn-primary:hover{
+.btn-primary:hover {
   background-color: #5b186c;
 }
 
-
 /* Navbar */
-
-
 .nav-lg {
   justify-content: flex-start;
 }
 
-.nav-sm{
-  justify-content: space-evenly;
-}
-
-.nav-sm{
+.nav-sm {
   font-size: 22px;
   font-weight: 100;
+  justify-content: space-evenly;
 }
 .nav-link {
   display: inline;
@@ -223,69 +216,3 @@ main {
   border-bottom: 1px solid #eaeaea;
   border-top: 1px solid #eaeaea;
 }
-/*
-.navbar a {
-  float: left;
-  padding: 12px;
-  color: white;
-  text-decoration: none;
-  font-size: 17px;
-}
-
-.navbar a:hover {
-  background-color: #000;
-}
-
-.active {
-  background-color: #4CAF50;
-} 
-
-@media screen and (max-width: 500px) {
-  .navbar a {
-    float: none;
-    display: block;
-  }
-}
-*/
-/* .navbar {
-    font-size: 4vh;
- }
-
-.sticky-top {
-    font-size: 2vh;
-}
-
-  body {
-    padding: 0;
-  }
-
-  .justify-content-end {
-    margin-right: 0;
-  }
-
-  .home-image {
-    padding: 0;
-    margin: 0;
-    margin-right: 0;
-    height: 100vh;
-    background-image: url("http://www.speakeasybcn.com/blog/wp-content/uploads/2018/03/@elenasarinena-born.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center; 
-    overflow: hidden;
-
-  }
-
-  .d-flex {
-    justify-content: center;
-    align-content: center;
-  }
-
-  .home {
-    height: 50%;
-    margin-top: 30%
-  }
-
-  .jumbotron {
-    background-color: rgba(243, 237, 237, 0.788);
-  } */
