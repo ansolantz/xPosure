@@ -37,41 +37,42 @@ router.get('/instagram/callback',
           return;
         }
 
-        axios.get(media)
-          .then((response) => {
-            const data = response.data.data;
-            let user = req.user;
-            user.images = data.map(img => img.images);
-            user.images.forEach(image => {
-              cloudinary.uploader.upload(image.standard_resolution.url, { folder: 'xposure', image_metadata: true }, (error, result) => {
-                if (error) {
-                  console.log('Issue uploading files to Cloudinary', error);
-                } else {
-                  let standardResolutionImageUrl = result.secure_url;
-                  let standardResolutionCloudId = result.public_id;
-                  cloudinary.uploader.upload(image.standard_resolution.url, { folder: 'xposure', width: 300, height: 300, crop: 'thumb' }, (error, result) => {
+        // > create new user and save their info to DB then redirect to their profile page
+        User.create({ username, displayName, homePage, image, bio })
+          .then(() => {
+            axios.get(media)
+              .then((response) => {
+                const data = response.data.data;
+                let user = req.user;
+                user.images = data.map(img => img.images);
+                user.images.forEach((image, index) => {
+                  cloudinary.uploader.upload(image.standard_resolution.url, { folder: 'xposure', image_metadata: true }, (error, result) => {
                     if (error) {
                       console.log('Issue uploading files to Cloudinary', error);
                     } else {
-                      let thumbnailImageUrl = result.secure_url;
-                      let thumbnailCloudId = result.public_id;
-                      User.findOne({ username: username })
-                        .then((user) => {
-                          Media.create({ standard_resolution: standardResolutionImageUrl, cloudId: standardResolutionCloudId, thumbnail: thumbnailImageUrl, thumbnail_cloudId: thumbnailCloudId, creatorId: user._id })
-                            .then(() => console.log('Media inserted into the DB successfully'))
-                            .catch((error) => console.log('Error inserting media into the DB', error));
-                        })
-                        .catch((error) => console.log('Error finding user', error));
+                      let standardResolutionImageUrl = result.secure_url;
+                      let standardResolutionCloudId = result.public_id;
+                      cloudinary.uploader.upload(image.standard_resolution.url, { folder: 'xposure', width: 300, height: 300, crop: 'thumb' }, (error, result) => {
+                        if (error) {
+                          console.log('Issue uploading files to Cloudinary', error);
+                        } else {
+                          let thumbnailImageUrl = result.secure_url;
+                          let thumbnailCloudId = result.public_id;
+                          User.findOne({ username: username })
+                            .then((dbuser) => {
+                              Media.create({ standard_resolution: standardResolutionImageUrl, cloudId: standardResolutionCloudId, thumbnail: thumbnailImageUrl, thumbnail_cloudId: thumbnailCloudId, creatorId: dbuser._id })
+                                .then(() => {})
+                                .catch((error) => console.log('Error inserting media into the DB', error));
+                            })
+                            .catch((error) => console.log('Error finding user', error));
+                        }
+                      });
                     }
                   });
-                }
-              });
-            });
+                });
+              })
+              .catch((err) => console.log('Unable to retrieve media:', err));
           })
-          .catch((err) => console.log('Unable to retrieve media:', err));
-
-        // > create new user and save their info to DB then redirect to their profile page
-        User.create({ username, displayName, homePage, image, bio })
           .then(() => res.redirect(`/${username}`))
           .catch((err) => console.log('Issue saving user to database:', err));
 

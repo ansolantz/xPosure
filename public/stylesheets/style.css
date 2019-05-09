@@ -95,9 +95,10 @@ nav .wrapper {
   border: 1px solid #eaeaea;
 }
 
-.line-breaks{
+.line-breaks {
   white-space: pre-wrap;
 }
+
 .text-area {
   flex: 0 0 70%;
 }
@@ -107,6 +108,7 @@ nav .wrapper {
   padding: 5px;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
 }
 
 .btn {
