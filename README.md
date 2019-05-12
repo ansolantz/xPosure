@@ -1,20 +1,19 @@
-# xPosure (working title)
+# xPosure 
 
 ## Description
-xPosure is a social picture discovery and organisation application. It is built using express, Node.js, mongoose, and bootstrap.
+xPosure is a social picture discovery and organisation application. It is a fullstack application built using express, Node.js, mongoose, and bootstrap. It supports social login using Instagram as well as image uploads to an external server.
 
-## User Stories
+
+## Prepration work - User Stories
 
 **HOME**
 
 As a user, I want to see a nice landing page with info about the app and login , so that I can understand what it is about and how to join.
 
 
-
 **SIGNUP**
 
 As a user, I want to sign up easily, so that I can start managing and sharing my media.
-
 
 
 **MY MEDIA**
