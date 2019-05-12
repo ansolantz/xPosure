@@ -7,8 +7,8 @@
     "start-dev": "nodemon ./bin/www"
   },
   "engines": {
-    "node": "x.x.x",
-    "npm": "x.x.x"
+    "node": "v11.14.0",
+    "npm": "6.7.0"
   },
   "dependencies": {
     "axios": "^0.18.0",
