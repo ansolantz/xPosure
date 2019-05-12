@@ -1,7 +1,15 @@
 # xPosure 
 
 ## Description
-xPosure is a social picture discovery and organisation application. It is a fullstack application built using express, Node.js, mongoose, and bootstrap. It supports social login using Instagram as well as image uploads to an external server.
+xPosure was the second project execute at Ironhack. In is a social picture discovery and organisation application built in only 6 days. It is a fullstack application built using express, Node.js, mongoose, and bootstrap.
+
+It supports social login using Instagram as well as image uploads to an external server. Further it also supports liking other user images and exploring content from others to get inspiration and follow them.
+
+Features that was on the todo list but never finished due to time contraints were: 
+- Google Login and photo sync
+- Filtering by geo location
+- Link counts
+- etc
 
 
 ## Prepration work - User Stories
