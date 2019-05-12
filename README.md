@@ -1,7 +1,7 @@
 # xPosure (working title)
 
 ## Description
-xPosure is a social picture discovery and organisation application. It is built using express, Node.js, mongoose, and bootstrap.
+xPosure is a picture sharing and organisation application. It is built using express, Node.js, mongoose, and bootstrap.
 
 ## User Stories
 
@@ -33,6 +33,10 @@ As a user, I want to have a full-scale picture view, so I can see all the detail
 
 As a user, I want have a feed of pictures from other users, so I can expore what aothers have shared.
 
+**LIKE VIEW**
+
+As a user, I want to see all my favorite photos in one page.
+
 **MAP EXPLORE**
 
 As a user, I want to see a map with tagges pictures, so I can see what pictures were taken around me or around a location I'm interested in. 
@@ -47,15 +51,21 @@ As a user, I want to see a map with tagges pictures, so I can see what pictures 
 ### user.js
 ```js
 const userSchema = new Schema({
+  // USING INSTAGRAM SCHEMA
+  displayName: String,
+  homePage: String,
+  image: String,
+  bio: String,
+  // END OF USING INSTAGRAM SCHEMA
   firstName: String,
   lastName: String,
   email: String,
   username: String,
   passwordHash: String,
   profile: {
-​    bio: String,
-​    image: String,
-​    location: String
+    bio: String,
+    image: String,
+    location: String
   },
   media: [],
   followers: [],
@@ -64,7 +74,7 @@ const userSchema = new Schema({
   saved: [],
   activityLog: [],
   timestamp: {
-​    created_at: Date(),
+    createdAt: { type: Date, default: Date.now }
   }
 });
 ```
@@ -72,23 +82,31 @@ const userSchema = new Schema({
 ### media.js
 ```js
 const mediaSchema = new Schema({
-  url: {
-​    thumbnail: String, 
-​    full_size: String
-  },
+  standard_resolution: String,
+  thumbnail: String,
+  cloudId: String,
+  thumbnail_cloudId: String,
   meta: {
-​    media_type: String,
-​    timestamp: Date(),
-​    geolocation: [Number],
-​    camera: String,
-​    description: String
+    type: metaSchema
   },
-  creatorId: String,
-  visibility: boolean,
+  creatorId: { type: Schema.Types.ObjectId, ref: 'User' },
+  visibility: { type: Boolean, default: true },
   likes: [],
   saves: [],
-  filtertags: []
+  tags: [],
+  timestamps: {
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now }
+  }
 });
+
+const metaSchema = new Schema({
+  media_type: String,
+  geolocation: [Number],
+  camera: String,
+  description: String
+});
+
 ```
 
 ## Routes
@@ -108,7 +126,7 @@ const mediaSchema = new Schema({
 | /signup | GET       | render signup form |
 | /signup | POST      | Create new user    |
 
-### explore.js (protected?)
+### explore.js (protected)
 | Route           | HTTP Verb | Description                        |
 | --------------- | --------- | ---------------------------------- |
 | /explore        | GET       | render explore view, get all media |
@@ -153,12 +171,15 @@ const mediaSchema = new Schema({
 
 ## Links
 
+### Demo
+[Deploy] (https://xposure-ironhack.herokuapp.com)
 
 ### Trello
 [Trello kanban board] (https://trello.com/invite/b/gNbmMcI2/6bc5b7c2b98e50db7c421eee55367784/xposure)
 
 ### Git
-[Github code repository] (https://github.com/BenjaminWoerner/xPosure)
+[Github code repository] (https://github.com/ansolantz/xPosure)
+
 
 
 ### Slides
