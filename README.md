@@ -179,7 +179,7 @@ const metaSchema = new Schema({
 ## Links
 
 ### Demo
-[Deploy] (https://xposure-ironhack.herokuapp.com)
+[Deploy] (https://xposure-app.herokuapp.com/)
 
 ### Trello
 [Trello kanban board] (https://trello.com/invite/b/gNbmMcI2/6bc5b7c2b98e50db7c421eee55367784/xposure)
