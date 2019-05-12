@@ -21,8 +21,8 @@ const manageRouter = require('./routes/manage');
 const { dbName, dbUrl } = require('./config/db');
 
 mongoose
-  .connect(`mongodb://localhost/${dbName}`, { useNewUrlParser: true })
-  //.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useFindAndModify: false })
+  //.connect(`mongodb://localhost/${dbName}`, { useNewUrlParser: true })
+  .connect(process.env.MONGODB_URI, { useNewUrlParser: true, useFindAndModify: false })
   .then(x => {
     console.log(`Connected to Mongo!`);
   })
