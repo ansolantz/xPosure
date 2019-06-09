@@ -1,18 +1,24 @@
 # xPosure 
 
-## Description
-xPosure was the second project execute at Ironhack. In is a social picture discovery and organisation application built in only 6 days. It is a fullstack application built using express, Node.js, mongoose, and bootstrap.
+## About the app
+xPosure was my second project at Ironhack Barcelona. In is a photo sharing web application with Instagram authentication and CRUD operations. It is built with Node, Express, Mongoose, HTML w/ Handlebars, CSS, JavaScript, REST APIs. 
+
+![Login](./public/images/app-login.jpg) ![Profile](./public/images/app-profile.jpg) ![Feed](./public/images/app-feed.jpg) 
 
 It supports social login using Instagram as well as image uploads to an external server. Further it also supports liking other user images and exploring content from others to get inspiration and follow them.
 
-Features that was on the todo list but never finished due to time contraints were: 
-- Google Login and photo sync
-- Filtering by geo location
-- Link counts
-- etc
+The app is responsive and was built in only 6 days.
 
 
-## Prepration work - User Stories
+![Responsive view](./public/images/app-responsive.jpg)
+
+
+
+------
+
+
+
+## User Stories
 
 **HOME**
 
@@ -44,11 +50,13 @@ As a user, I want have a feed of pictures from other users, so I can expore what
 
 As a user, I want to see all my favorite photos in one page.
 
-**MAP EXPLORE**
+**MAP EXPLORE** (Backlog)
 
 As a user, I want to see a map with tagges pictures, so I can see what pictures were taken around me or around a location I'm interested in. 
 
 
+
+------
 
 
 
@@ -158,36 +166,7 @@ const metaSchema = new Schema({
 
 
 
-
-## Views
-
-### Layout (+logout)
-
-### Home + login (public)
-### Signup (public)
-
-### MyMedia (+ 3rd-party-collections)
-### MediaEdit
-
-### PhotoView
-
-### ExploreView/Feed
-
-### MapExplore
-
-
-## Links
-
 ### Demo
-[Deploy] (https://xposure-app.herokuapp.com/)
-
-### Trello
-[Trello kanban board] (https://trello.com/invite/b/gNbmMcI2/6bc5b7c2b98e50db7c421eee55367784/xposure)
-
-### Git
-[Github code repository] (https://github.com/ansolantz/xPosure)
+[App] (https://xposure-app.herokuapp.com/)
 
 
-
-### Slides
-N/A
