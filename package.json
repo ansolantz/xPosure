@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^5.0.0",
     "cloudinary": "^1.14.0",
     "connect-mongo": "^2.0.3",
     "cookie-parser": "~1.4.3",
